@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\{
+    BlogController,
+};
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -33,3 +36,5 @@ Route::get('pegawai-page', function () {
 Route::get('pelanggan-page', function () {
     return 'Halaman untuk pelanggan';
 })->middleware('role:pelanggan')->name('pelanggan.page');
+
+Route::resource('/blog', BlogController::class)->middleware('auth');
