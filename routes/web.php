@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,3 +21,15 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::get('admin-page', function () {
+    return 'Halaman untuk admin';
+})->middleware('role:admin')->name('admin.page');
+
+Route::get('pegawai-page', function () {
+    return 'Halaman untuk pegawai';
+})->middleware('role:pegawai')->name('pegawai.page');
+
+Route::get('pelanggan-page', function () {
+    return 'Halaman untuk pelanggan';
+})->middleware('role:pelanggan')->name('pelanggan.page');
