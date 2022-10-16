@@ -39,4 +39,7 @@ Route::get('pelanggan-page', function () {
 })->middleware('role:pelanggan')->name('pelanggan.page');
 
 Route::resource('/blog', BlogController::class)->middleware('auth');
-Route::get('/transaksi', [TransaksiController::class, 'index']);
+// Route::get('/transaksi', [TransaksiController::class, 'index']);
+Route::get('/ongkir', [TransaksiController::class, 'index']);
+Route::post('/ongkir', [TransaksiController::class, 'check_ongkir']);
+Route::get('/cities/{province_id}', [TransaksiController::class, 'getCities']);
