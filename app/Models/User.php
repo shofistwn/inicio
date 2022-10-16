@@ -48,4 +48,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Blog::class);
     }
+
+    public function event()
+    {
+        return $this->hasMany(Event::class);
+    }
 }

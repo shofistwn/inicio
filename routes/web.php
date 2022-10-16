@@ -2,7 +2,8 @@
 
 use App\Http\Controllers\{
     BlogController,
-    TransaksiController
+    TransaksiController,
+    EventController
 };
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -38,8 +39,22 @@ Route::get('pelanggan-page', function () {
     return 'Halaman untuk pelanggan';
 })->middleware('role:pelanggan')->name('pelanggan.page');
 
-Route::resource('/blog', BlogController::class)->middleware('auth');
+// Route::resource('/blog', BlogController::class);
 // Route::get('/transaksi', [TransaksiController::class, 'index']);
 Route::get('/ongkir', [TransaksiController::class, 'index']);
 Route::post('/ongkir', [TransaksiController::class, 'check_ongkir']);
 Route::get('/cities/{province_id}', [TransaksiController::class, 'getCities']);
+
+Route::middleware('auth')->group(function () {
+    Route::resource('/blog', BlogController::class);
+    Route::resource('/event', EventController::class);
+
+    Route::middleware('role:admin')->group(function () {
+    });
+
+    Route::middleware('role:pegawai')->group(function () {
+    });
+
+    Route::middleware('role:pelanggan')->group(function () {
+    });
+});
