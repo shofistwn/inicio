@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\{
     BlogController,
+    TransaksiController
 };
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -38,3 +39,4 @@ Route::get('pelanggan-page', function () {
 })->middleware('role:pelanggan')->name('pelanggan.page');
 
 Route::resource('/blog', BlogController::class)->middleware('auth');
+Route::get('/transaksi', [TransaksiController::class, 'index']);
