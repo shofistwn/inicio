@@ -41,8 +41,8 @@ Route::get('pelanggan-page', function () {
 })->middleware('role:pelanggan')->name('pelanggan.page');
 
 // Route::resource('/blog', BlogController::class);
-// Route::get('/transaksi', [TransaksiController::class, 'index']);
-Route::get('/ongkir', [TransaksiController::class, 'index']);
+Route::get('/transaksi', [TransaksiController::class, 'index']);
+Route::get('/ongkir', [TransaksiController::class, 'ongkir']);
 Route::post('/ongkir', [TransaksiController::class, 'check_ongkir']);
 Route::get('/cities/{province_id}', [TransaksiController::class, 'getCities']);
 
@@ -50,6 +50,9 @@ Route::middleware('auth')->group(function () {
     Route::resource('/blog', BlogController::class);
     Route::resource('/event', EventController::class);
     Route::resource('/obat', ObatController::class);
+    Route::get('/checkout', [TransaksiController::class, 'checkout']);
+    Route::post('/checkout', [TransaksiController::class, 'payment'])->name('shop.payment');
+    Route::get('/cities/{province_id}', [TransaksiController::class, 'getCities']);
 
     Route::middleware('role:admin')->group(function () {
     });
