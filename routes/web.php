@@ -3,7 +3,8 @@
 use App\Http\Controllers\{
     BlogController,
     TransaksiController,
-    EventController
+    EventController,
+    ObatController
 };
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -48,6 +49,7 @@ Route::get('/cities/{province_id}', [TransaksiController::class, 'getCities']);
 Route::middleware('auth')->group(function () {
     Route::resource('/blog', BlogController::class);
     Route::resource('/event', EventController::class);
+    Route::resource('/obat', ObatController::class);
 
     Route::middleware('role:admin')->group(function () {
     });

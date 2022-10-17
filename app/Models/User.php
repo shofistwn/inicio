@@ -53,4 +53,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Event::class);
     }
+
+    public function obat()
+    {
+        return $this->hasMany(Obat::class);
+    }
 }
