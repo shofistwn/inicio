@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Event;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class EventController extends Controller
 {
@@ -76,7 +77,7 @@ class EventController extends Controller
             'user_id' => auth()->user()->id,
             'foto' => time() . $foto->hashName(),
             'judul' => $request->judul,
-            'slug' => \Str::slug($request->judul),
+            'slug' => Str::slug($request->judul),
             'mulai' => $request->mulai,
             'selesai' => $request->selesai,
             'lokasi' => $request->lokasi,
@@ -149,7 +150,7 @@ class EventController extends Controller
             $event->update([
                 'user_id' => auth()->user()->id,
                 'judul' => $request->judul,
-                'slug' => \Str::slug($request->judul),
+                'slug' => Str::slug($request->judul),
                 'mulai' => $request->mulai,
                 'selesai' => $request->selesai,
                 'lokasi' => $request->lokasi,
@@ -165,7 +166,7 @@ class EventController extends Controller
                 'user_id' => auth()->user()->id,
                 'foto' => time() . $foto->hashName(),
                 'judul' => $request->judul,
-                'slug' => \Str::slug($request->judul),
+                'slug' => Str::slug($request->judul),
                 'mulai' => $request->mulai,
                 'selesai' => $request->selesai,
                 'lokasi' => $request->lokasi,

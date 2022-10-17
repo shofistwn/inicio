@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Obat;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class ObatController extends Controller
 {
@@ -79,7 +80,7 @@ class ObatController extends Controller
 
         Obat::create([
             'user_id' => auth()->user()->id,
-            'slug' => \Str::slug($request->nama),
+            'slug' => Str::slug($request->nama),
             'foto' => time() . $foto->hashName(),
             'nama' => $request->nama,
             'kategori' => $request->kategori,
@@ -164,7 +165,7 @@ class ObatController extends Controller
         if ($request->file('foto') == "") {
             $obat->update([
                 'user_id' => auth()->user()->id,
-                'slug' => \Str::slug($request->nama),
+                'slug' => Str::slug($request->nama),
                 'nama' => $request->nama,
                 'kategori' => $request->kategori,
                 'stok' => $request->stok,
@@ -185,7 +186,7 @@ class ObatController extends Controller
 
             $obat->update([
                 'user_id' => auth()->user()->id,
-                'slug' => \Str::slug($request->nama),
+                'slug' => Str::slug($request->nama),
                 'foto' => time() . $foto->hashName(),
                 'nama' => $request->nama,
                 'kategori' => $request->kategori,

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Blog;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class BlogController extends Controller
 {
@@ -16,6 +17,7 @@ class BlogController extends Controller
     public function index()
     {
         $blogs = Blog::with('user')->get();
+        return view('pages.blog.index', compact('blogs'));
         return response()->json([
             'data' => $blogs
         ]);
@@ -71,7 +73,7 @@ class BlogController extends Controller
             'user_id' => auth()->user()->id,
             'foto' => time() . $foto->hashName(),
             'judul' => $request->judul,
-            'slug' => \Str::slug($request->judul),
+            'slug' => Str::slug($request->judul),
             'kategori' => $request->kategori,
             'konten' => $dom->saveHTML()
         ]);
@@ -139,7 +141,7 @@ class BlogController extends Controller
             $blog->update([
                 'user_id' => auth()->user()->id,
                 'judul' => $request->judul,
-                'slug' => \Str::slug($request->judul),
+                'slug' => Str::slug($request->judul),
                 'kategori' => $request->kategori,
                 'konten' => $dom->saveHTML()
             ]);
@@ -153,7 +155,7 @@ class BlogController extends Controller
                 'user_id' => auth()->user()->id,
                 'foto' => time() . $foto->hashName(),
                 'judul' => $request->judul,
-                'slug' => \Str::slug($request->judul),
+                'slug' => Str::slug($request->judul),
                 'kategori' => $request->kategori,
                 'konten' => $dom->saveHTML()
             ]);
