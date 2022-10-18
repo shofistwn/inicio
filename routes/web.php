@@ -4,7 +4,8 @@ use App\Http\Controllers\{
     BlogController,
     TransaksiController,
     EventController,
-    ObatController
+    ObatController,
+    MidtransController
 };
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -46,13 +47,23 @@ Route::get('/ongkir', [TransaksiController::class, 'ongkir']);
 Route::post('/ongkir', [TransaksiController::class, 'check_ongkir']);
 Route::get('/cities/{province_id}', [TransaksiController::class, 'getCities']);
 
+Route::post('/midtrans/notification', [MidtransController::class, 'receive']);
+
 Route::middleware('auth')->group(function () {
     Route::resource('/blog', BlogController::class);
     Route::resource('/event', EventController::class);
     Route::resource('/obat', ObatController::class);
+
     Route::get('/checkout', [TransaksiController::class, 'checkout']);
-    Route::post('/checkout', [TransaksiController::class, 'payment'])->name('shop.payment');
+    Route::post('/payment', [TransaksiController::class, 'payment'])->name('payment');
+    Route::get('/midtrans/finish', function () {
+        echo 'finish';
+    });
     Route::get('/cities/{province_id}', [TransaksiController::class, 'getCities']);
+
+
+
+
 
     Route::middleware('role:admin')->group(function () {
     });

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Exception;
 use App\Models\City;
 use App\Models\Province;
+use App\Models\Transaksi;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Kavist\RajaOngkir\Facades\RajaOngkir;
@@ -14,35 +15,6 @@ use Midtrans\Snap;
 
 class TransaksiController extends Controller
 {
-    public function index(Request $request)
-    {
-        Config::$serverKey = config('midtrans.serverKey');
-        Config::$isProduction = config('midtrans.isProduction');
-        Config::$isSanitized = config('midtrans.isSanitized');
-        Config::$is3ds = config('midtrans.is3ds');
-
-        $midtrans_params = [
-            'transaction_details' => [
-                'order_id' => time(),
-                'gross_amount' => 10000,
-            ],
-            'customer_details' => [
-                'first_name' => 'Andri',
-                'last_name' => 'Setiawan',
-                'email' => 'user@mail.com',
-            ],
-            'enabled_payments' => ['shopeepay', 'bank_transfer'],
-            'vtweb' => []
-        ];
-
-        try {
-            $paymentURL = Snap::createTransaction($midtrans_params)->redirect_url;
-
-            return Redirect::to($paymentURL);
-        } catch (Exception $e) {
-            echo $e->getMessage();
-        }
-    }
     public function ongkir()
     {
         $provinces = Province::pluck('name', 'province_id');
@@ -84,14 +56,51 @@ class TransaksiController extends Controller
 
     public function payment(Request $request)
     {
+        $request->validate([
+            'nama_penerima' => 'required',
+            'telepon' => 'required',
+            'provinsi' => 'required',
+            'kota' => 'required',
+            'alamat_detail' => 'required',
+            'kode_pos' => 'required',
+            'jasa_ekspedisi' => 'required',
+            'jumlah_pesanan' => 'required',
+            'ongkos_kirim' => 'required',
+            'total_pembayaran' => 'required',
+        ]);
+
+        $request['user_id'] = auth()->user()->id;
+        $request['obat_id'] = auth()->user()->id;
+        $request['harga_obat'] = auth()->user()->id;
+        $request['berat_obat'] = auth()->user()->id;
+
+        Transaksi::create([
+            'user_id' => $request->user_id,
+            'obat_id' => $request->obat_id,
+            'nama_penerima' => $request->nama_penerima,
+            'telepon' => $request->telepon,
+            'provinsi' => $request->provinsi,
+            'kota' => $request->kota,
+            'alamat_detail' => $request->alamat_detail,
+            'kode_pos' => $request->kode_pos,
+            'jasa_ekspedisi' => $request->jasa_ekspedisi,
+            'jumlah_pesanan' => $request->jumlah_pesanan,
+            'harga_obat' => $request->harga_obat,
+            'berat_obat' => $request->berat_obat,
+            'ongkos_kirim' => $request->ongkos_kirim,
+            'total_pembayaran' => $request->total_pembayaran,
+        ]);
+
         Config::$serverKey = config('midtrans.serverKey');
         Config::$isProduction = config('midtrans.isProduction');
         Config::$isSanitized = config('midtrans.isSanitized');
         Config::$is3ds = config('midtrans.is3ds');
 
+        $transaksi = Transaksi::orderBy('id', 'DESC')->first()->id;
+        $transaksi += 1;
         $midtrans_params = [
             'transaction_details' => [
-                'order_id' => time(),
+                'order_id' => 'INV-' . $transaksi,
                 'gross_amount' => $request->total_pembayaran,
             ],
             'customer_details' => [
@@ -99,7 +108,7 @@ class TransaksiController extends Controller
                 'last_name' => 'Setiawan',
                 'email' => 'user@mail.com',
             ],
-            'enabled_payments' => ['shopeepay', 'bank_transfer'],
+            // 'enabled_payments' => ['shopeepay', 'bank_transfer'],
             'vtweb' => []
         ];
 

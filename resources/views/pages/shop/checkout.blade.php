@@ -35,7 +35,7 @@
     <div class="checkout">
         <div class="container-fluid">
 
-            <form action="{{ route('shop.payment') }}" method="post">
+            <form action="{{ route('payment') }}" method="post">
                 @csrf
 
                 <div class="row">
@@ -44,22 +44,22 @@
                             <div class="billing-address">
                                 <h2>Checkout</h2>
                                 <div class="row">
-                                    <input id="form-ongkir" type="text" hidden>
+                                    <input id="form-ongkir" type="text" name="ongkos_kirim" hidden>
                                     <input id="form-total" type="number" name="total_pembayaran" hidden>
 
                                     <div class="col-md-12 mt-3">
                                         <label>Nama Penerima</label>
                                         <input class="form-control" type="text" placeholder="Nama Lengkap"
-                                            value="{{ old('nama_penerima', $user->nama) }}">
+                                            value="{{ old('nama_penerima', $user->nama) }}" name="nama_penerima">
                                     </div>
                                     <div class="col-md-12 mt-3">
                                         <label>Telepon</label>
                                         <input class="form-control" type="text" placeholder="Telepon"
-                                            value="{{ old('telepon', $user->telepon) }}">
+                                            value="{{ old('telepon', $user->telepon) }}" name="telepon">
                                     </div>
                                     <div class="col-md-12 mt-3">
                                         <label class="mt-2">Provinsi</label>
-                                        <select class="form-control provinsi-asal" name="province_destination">
+                                        <select class="form-control provinsi-asal" name="provinsi">
                                             <option value="0">Pilih Provinsi</option>
                                             @foreach ($provinces as $province => $value)
                                                 <option value="{{ $province }}">{{ $value }}</option>
@@ -68,21 +68,22 @@
                                     </div>
                                     <div class="col-md-12 mt-3">
                                         <label class="mt-2">Kota / Kabupaten</label>
-                                        <select class="form-control kota-tujuan" name="city_destination">
+                                        <select class="form-control kota-tujuan" name="kota">
                                             <option value="">Pilih Kota / Kabupaten</option>
                                         </select>
                                     </div>
                                     <div class="col-md-12 mt-3">
                                         <label>Alamat Detail</label>
-                                        <textarea name="" class="form-control" placeholder="Alamat"></textarea>
+                                        <textarea class="form-control" placeholder="Alamat" name="alamat_detail"></textarea>
                                     </div>
                                     <div class="col-md-12 mt-3">
                                         <label>Kode Pos</label>
-                                        <input class="form-control" type="number" placeholder="Kode Pos">
+                                        <input class="form-control" type="number" placeholder="Kode Pos"
+                                            name="kode_pos">
                                     </div>
                                     <div class="col-md-12 mt-3">
                                         <label class="mt-2">Jasa Ekspedisi</label>
-                                        <select class="form-control kurir" name="courier">
+                                        <select class="form-control kurir" name="jasa_ekspedisi">
                                             <option value="0">Pilih Jasa Ekspedisi</option>
                                             <option value="jne">JNE</option>
                                             <option value="pos">POS</option>
@@ -291,7 +292,7 @@
             }).format(number);
         }
         var $subtotal = 10000;
-        document.getElementById("form-total").value = 0;
+        document.getElementById("form-total").value = 1;
         document.getElementById("form-ongkir").value = 0;
         document.getElementById("subtotal").innerHTML = rupiah($subtotal, 'Rp. ');
         $(document).ready(function() {
@@ -308,7 +309,7 @@
                 }
             });
             //ajax select kota asal
-            $('select[name="province_destination"]').on('change', function() {
+            $('select[name="provinsi"]').on('change', function() {
                 let provindeId = $(this).val();
                 if (provindeId) {
                     jQuery.ajax({
@@ -316,29 +317,29 @@
                         type: "GET",
                         dataType: "json",
                         success: function(response) {
-                            $('select[name="city_destination"]').empty();
-                            $('select[name="city_destination"]').append(
+                            $('select[name="kota"]').empty();
+                            $('select[name="kota"]').append(
                                 '<option value="">Pilih Kota / Kabupaten</option>');
                             $.each(response, function(key, value) {
-                                $('select[name="city_destination"]').append(
+                                $('select[name="kota"]').append(
                                     '<option value="' + key + '">' + value +
                                     '</option>');
                             });
                         },
                     });
                 } else {
-                    $('select[name="city_destination"]').append(
+                    $('select[name="kota"]').append(
                         '<option value="">Pilih Kota / Kabupaten</option>');
                 }
             });
 
             let isProcessing = false;
-            $('select[name="courier"]').on('change', function() {
+            $('select[name="jasa_ekspedisi"]').on('change', function() {
 
                 let token = $("meta[name='csrf-token']").attr("content");
                 let city_origin = 1;
-                let city_destination = $('select[name=city_destination]').val();
-                let courier = $(this).val();
+                let kota = $('select[name=kota]').val();
+                let jasa_ekspedisi = $(this).val();
                 let weight = 1000;
 
                 if (isProcessing) {
@@ -351,8 +352,8 @@
                     data: {
                         _token: token,
                         city_origin: city_origin,
-                        city_destination: city_destination,
-                        courier: courier,
+                        city_destination: kota,
+                        courier: jasa_ekspedisi,
                         weight: weight,
                     },
                     dataType: "JSON",

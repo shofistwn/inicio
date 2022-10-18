@@ -27,13 +27,14 @@ class CreateTransaksisTable extends Migration
             $table->integer('kota');
             $table->string('alamat_detail');
             $table->string('no_resi')->nullable();
+            $table->string('kode_pos');
             $table->string('jasa_ekspedisi');
             $table->string('harga_obat');
             $table->string('berat_obat');
             $table->string('jumlah_pesanan');
             $table->string('ongkos_kirim');
             $table->string('total_pembayaran');
-            $table->string('status_pembayaran')->nullable();
+            $table->enum('status_pembayaran', ['1', '2', '3', '4'])->comment('1=menunggu pembayaran, 2=sudah dibayar, 3=kadaluarsa, 4=batal')->default('1');
             $table->timestamps();
         });
     }
