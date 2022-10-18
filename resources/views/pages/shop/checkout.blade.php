@@ -303,6 +303,7 @@
                 document.getElementById("subtotal").innerHTML = rupiah($subtotal, 'Rp. ');
                 if (Number(document.getElementById("form-ongkir").value) > 0) {
                     $total = Number(document.getElementById("form-ongkir").value) + Number($subtotal);
+                    document.getElementById("form-total").value = $total;
                     document.getElementById("total").innerHTML = rupiah($total, 'Rp. ');
                 }
             });
