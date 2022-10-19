@@ -39,17 +39,17 @@
                                 <div class="col-md-6 mt-2">
                                     <label>Kategori</label>
                                     <select class="custom-select" name="kategori">
-                                        <option selected>Kategori Obat</option>
-                                        <option>Batuk dan Flu</option>
-                                        <option>Demam</option>
-                                        <option>Kulit</option>
-                                        <option>Otot dan Tulang</option>
-                                        <option>Alergi</option>
-                                        <option>Perawatan Kewanitaan</option>
-                                        <option>Saluran pencernaan</option>
-                                        <option>Vitamin dan Suplemen</option>
-                                        <option>Antibiotik</option>
-                                        <option>Mulut dan Tenggorokan</option>
+                                        <option>Kategori Obat</option>
+                                        <option {{ old('kategori') == 'Batuk dan Flu' ? 'selected' : '' }}>Batuk dan Flu</option>
+                                        <option {{ old('kategori') == 'Demam' ? 'selected' : '' }}>Demam</option>
+                                        <option {{ old('kategori') == 'Kulit' ? 'selected' : '' }}>Kulit</option>
+                                        <option {{ old('kategori') == 'Otot dan Tulang' ? 'selected' : '' }}>Otot dan Tulang</option>
+                                        <option {{ old('kategori') == 'Alergi' ? 'selected' : '' }}>Alergi</option>
+                                        <option {{ old('kategori') == 'Perawatan Kewanitaan' ? 'selected' : '' }}>Perawatan Kewanitaan</option>
+                                        <option {{ old('kategori') == 'Saluran pencernaan' ? 'selected' : '' }}>Saluran pencernaan</option>
+                                        <option {{ old('kategori') == 'Vitamin dan Suplemen' ? 'selected' : '' }}>Vitamin dan Suplemen</option>
+                                        <option {{ old('kategori') == 'Antibiotik' ? 'selected' : '' }}>Antibiotik</option>
+                                        <option {{ old('kategori') == 'Mulut dan Tenggorokan' ? 'selected' : '' }}>Mulut dan Tenggorokan</option>
                                     </select>
                                 </div>
                                 <div class="col-md-6 mt-2">
