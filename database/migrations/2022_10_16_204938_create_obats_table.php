@@ -24,7 +24,6 @@ class CreateObatsTable extends Migration
             $table->integer('stok');
             $table->string('harga');
             $table->string('deskripsi');
-            $table->string('komposisi');
             $table->string('dosis');
             $table->string('aturan_pakai');
             $table->string('manufaktur');

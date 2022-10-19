@@ -1,243 +1,97 @@
-@extends('layouts.app')
+@extends('layouts.main')
 
+@section('title', 'Tambah Obat')
 @section('content')
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="card">
-                    <div class="card-header">{{ __('Buat Postingan') }}</div>
+    <div class="add">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <div class="add-inner">
+                        <h2>Tambah Obat</h2>
 
-                    <div class="card-body">
                         <form method="POST" action="{{ route('obat.store') }}" enctype="multipart/form-data">
-                            <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-                                integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous">
-                            </script>
-                            <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css"
-                                rel="stylesheet">
-                            <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
                             @csrf
 
-                            <div class="row mb-3">
-                                <label for="foto"
-                                    class="col-md-4 col-form-label text-md-end">{{ __('Foto') }}</label>
-
+                            <div class="row">
                                 <div class="col-md-6">
-                                    <input id="foto" type="file"
-                                        class="form-control @error('foto') is-invalid @enderror" name="foto"
-                                        value="{{ old('foto') }}" required autocomplete="foto" autofocus>
-
-                                    @error('foto')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
+                                    <label>Upload Foto Obat</label><br>
+                                    <input type="file" accept="image/png,image/jpg,image/jpeg" name="foto">
                                 </div>
-                            </div>
-
-                            <div class="row mb-3">
-                                <label for="nama"
-                                    class="col-md-4 col-form-label text-md-end">{{ __('nama') }}</label>
-
                                 <div class="col-md-6">
-                                    <input id="nama" type="text"
-                                        class="form-control @error('nama') is-invalid @enderror" name="nama"
-                                        value="{{ old('nama') }}" required autocomplete="nama" autofocus>
-
-                                    @error('nama')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
+                                    <label>Nama Obat</label>
+                                    <input class="form-control" type="text" placeholder="Nama Obat" name="nama" value="{{ old('nama') }}">
+                                </div>
+                                <div class="col-md-6 mt-2">
+                                    <label>Stok</label>
+                                    <input class="form-control" type="number" placeholder="Stok" name="stok"
+                                    value="{{ old('stok') }}">
+                                </div>
+                                <div class="col-md-6 mt-2">
+                                    <label>Harga</label>
+                                    <input class="form-control" type="number" placeholder="Harga" name="harga"
+                                    value="{{ old('harga') }}">
+                                </div>
+                                <div class="col-md-6 mt-2">
+                                    <label>Dosis</label>
+                                    <input class="form-control" type="text" placeholder="Dosis" name="dosis"
+                                    value="{{ old('dosis') }}">
+                                </div>
+                                <div class="col-md-6 mt-2">
+                                    <label>Kategori</label>
+                                    <select class="custom-select" name="kategori">
+                                        <option selected>Kategori Obat</option>
+                                        <option>Batuk dan Flu</option>
+                                        <option>Demam</option>
+                                        <option>Kulit</option>
+                                        <option>Otot dan Tulang</option>
+                                        <option>Alergi</option>
+                                        <option>Perawatan Kewanitaan</option>
+                                        <option>Saluran pencernaan</option>
+                                        <option>Vitamin dan Suplemen</option>
+                                        <option>Antibiotik</option>
+                                        <option>Mulut dan Tenggorokan</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6 mt-2">
+                                    <label>Aturan Pakai</label>
+                                    <input class="form-control" type="text" placeholder="Aturan Pakai" name="aturan_pakai"
+                                    value="{{ old('aturan_pakai') }}">
+                                </div>
+                                <div class="col-md-6 mt-2">
+                                    <label>Manufaktur</label>
+                                    <input class="form-control" type="text" placeholder="Manufaktur" name="manufaktur"
+                                    value="{{ old('manufaktur') }}">
+                                </div>
+                                <div class="col-md-6 mt-2">
+                                    <label>Berat Obat</label>
+                                    <input class="form-control" type="number" placeholder="Berat Obat" name="berat"
+                                    value="{{ old('berat') }}">
+                                </div>
+                                <div class="col-md-6 mt-2">
+                                    <label>No Registrasi</label>
+                                    <input class="form-control" type="number" placeholder="No Registrasi" name="no_registrasi"
+                                    value="{{ old('no_registrasi') }}">
+                                </div>
+                                <div class="col-md-12 mt-2">
+                                    <label for="textarea">Deskripsi</label>
+                                    <textarea class="form-control" name="deskripsi" id="summernote"></textarea>
+                                </div>
+                                <div class="col-md-2 mt-4 mx-auto">
+                                    <button type="submit" class="btn btn-outline-success">submit</button>
                                 </div>
                             </div>
-
-                            <div class="row mb-3">
-                                <label for="kategori"
-                                    class="col-md-4 col-form-label text-md-end">{{ __('kategori') }}</label>
-
-                                <div class="col-md-6">
-                                    <input id="kategori" type="text"
-                                        class="form-control @error('kategori') is-invalid @enderror" name="kategori"
-                                        value="{{ old('kategori') }}" required autocomplete="kategori" autofocus>
-
-                                    @error('kategori')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>
-
-                            <div class="row mb-3">
-                                <label for="stok"
-                                    class="col-md-4 col-form-label text-md-end">{{ __('stok') }}</label>
-
-                                <div class="col-md-6">
-                                    <input id="stok" type="number"
-                                        class="form-control @error('stok') is-invalid @enderror" name="stok"
-                                        value="{{ old('stok') }}" required autocomplete="stok" autofocus>
-
-                                    @error('stok')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>
-
-                            <div class="row mb-3">
-                                <label for="harga"
-                                    class="col-md-4 col-form-label text-md-end">{{ __('harga') }}</label>
-
-                                <div class="col-md-6">
-                                    <input id="harga" type="number"
-                                        class="form-control @error('harga') is-invalid @enderror" name="harga"
-                                        value="{{ old('harga') }}" required autocomplete="harga" autofocus>
-
-                                    @error('harga')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>
-
-                            <div class="row mb-3">
-                                <label for="deskripsi"
-                                    class="col-md-4 col-form-label text-md-end">{{ __('deskripsi') }}</label>
-
-                                <div class="col-md-6">
-                                    <textarea name="deskripsi" id="summernote"></textarea>
-
-                                    @error('deskripsi')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>
-
-                            <div class="row mb-3">
-                                <label for="komposisi"
-                                    class="col-md-4 col-form-label text-md-end">{{ __('komposisi') }}</label>
-
-                                <div class="col-md-6">
-                                    <input id="komposisi" type="text"
-                                        class="form-control @error('komposisi') is-invalid @enderror" name="komposisi"
-                                        value="{{ old('komposisi') }}" required autocomplete="komposisi" autofocus>
-
-                                    @error('komposisi')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>
-
-                            <div class="row mb-3">
-                                <label for="dosis"
-                                    class="col-md-4 col-form-label text-md-end">{{ __('dosis') }}</label>
-
-                                <div class="col-md-6">
-                                    <input id="dosis" type="text"
-                                        class="form-control @error('dosis') is-invalid @enderror" name="dosis"
-                                        value="{{ old('dosis') }}" required autocomplete="dosis" autofocus>
-
-                                    @error('dosis')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>
-
-                            <div class="row mb-3">
-                                <label for="aturan_pakai"
-                                    class="col-md-4 col-form-label text-md-end">{{ __('aturan_pakai') }}</label>
-
-                                <div class="col-md-6">
-                                    <input id="aturan_pakai" type="text"
-                                        class="form-control @error('aturan_pakai') is-invalid @enderror" name="aturan_pakai"
-                                        value="{{ old('aturan_pakai') }}" required autocomplete="aturan_pakai" autofocus>
-
-                                    @error('aturan_pakai')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>
-
-                            <div class="row mb-3">
-                                <label for="manufaktur"
-                                    class="col-md-4 col-form-label text-md-end">{{ __('manufaktur') }}</label>
-
-                                <div class="col-md-6">
-                                    <input id="manufaktur" type="text"
-                                        class="form-control @error('manufaktur') is-invalid @enderror" name="manufaktur"
-                                        value="{{ old('manufaktur') }}" required autocomplete="manufaktur" autofocus>
-
-                                    @error('manufaktur')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>
-
-                            <div class="row mb-3">
-                                <label for="berat"
-                                    class="col-md-4 col-form-label text-md-end">{{ __('berat') }}</label>
-
-                                <div class="col-md-6">
-                                    <input id="berat" type="text"
-                                        class="form-control @error('berat') is-invalid @enderror" name="berat"
-                                        value="{{ old('berat') }}" required autocomplete="berat" autofocus>
-
-                                    @error('berat')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>
-
-                            <div class="row mb-3">
-                                <label for="no_registrasi"
-                                    class="col-md-4 col-form-label text-md-end">{{ __('no_registrasi') }}</label>
-
-                                <div class="col-md-6">
-                                    <input id="no_registrasi" type="text"
-                                        class="form-control @error('no_registrasi') is-invalid @enderror" name="no_registrasi"
-                                        value="{{ old('no_registrasi') }}" required autocomplete="no_registrasi" autofocus>
-
-                                    @error('no_registrasi')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>
-
-                            <div class="row mb-0">
-                                <div class="col-md-6 offset-md-4">
-                                    <button type="submit" class="btn btn-primary">
-                                        {{ __('Simpan') }}
-                                    </button>
-                                </div>
-                            </div>
-
-                            <script>
-                                $(document).ready(function() {
-                                    $('#summernote').summernote({
-                                        height: 450,
-                                    });
-                                });
-                            </script>
                         </form>
+
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    <script>
+        $(document).ready(function() {
+            $('#summernote').summernote({
+                height: 450,
+            });
+        });
+    </script>
 @endsection

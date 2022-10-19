@@ -16,12 +16,8 @@ class ObatController extends Controller
      */
     public function index()
     {
-        $obat = Obat::with('user')->get();
-        return response()->json([
-            'success' => true,
-            'message' => 'Daftar Data Obat',
-            'data' => $obat
-        ], 200);
+        $dataObat = Obat::with('user')->get();
+        return view('pages.shop.index', compact('dataObat'));
     }
 
     /**
@@ -42,6 +38,7 @@ class ObatController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request->all());
         $request->validate([
             'foto' => 'required|image|mimes:png,jpg,jpeg',
             'nama' => 'required',
@@ -49,7 +46,6 @@ class ObatController extends Controller
             'stok' => 'required',
             'harga' => 'required',
             'deskripsi' => 'required',
-            'komposisi' => 'required',
             'dosis' => 'required',
             'aturan_pakai' => 'required',
             'manufaktur' => 'required',
@@ -87,7 +83,6 @@ class ObatController extends Controller
             'stok' => $request->stok,
             'harga' => $request->harga,
             'deskripsi' => $dom->saveHTML(),
-            'komposisi' => $request->komposisi,
             'dosis' => $request->dosis,
             'aturan_pakai' => $request->aturan_pakai,
             'manufaktur' => $request->manufaktur,
@@ -136,7 +131,6 @@ class ObatController extends Controller
             'stok' => 'required',
             'harga' => 'required',
             'deskripsi' => 'required',
-            'komposisi' => 'required',
             'dosis' => 'required',
             'aturan_pakai' => 'required',
             'manufaktur' => 'required',
@@ -171,7 +165,6 @@ class ObatController extends Controller
                 'stok' => $request->stok,
                 'harga' => $request->harga,
                 'deskripsi' => $dom->saveHTML(),
-                'komposisi' => $request->komposisi,
                 'dosis' => $request->dosis,
                 'aturan_pakai' => $request->aturan_pakai,
                 'manufaktur' => $request->manufaktur,
@@ -193,7 +186,6 @@ class ObatController extends Controller
                 'stok' => $request->stok,
                 'harga' => $request->harga,
                 'deskripsi' => $dom->saveHTML(),
-                'komposisi' => $request->komposisi,
                 'dosis' => $request->dosis,
                 'aturan_pakai' => $request->aturan_pakai,
                 'manufaktur' => $request->manufaktur,

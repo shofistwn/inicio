@@ -21,8 +21,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 Route::get('/', function () {
-    return view('welcome');
+    return view('index');
+});
+Route::get('/shop', function () {
+    return view('pages.shop.index');
+})->name('shop.index');
+Route::get('/cart', function () {
+    return view('pages.shop.cart');
 });
 
 Auth::routes();

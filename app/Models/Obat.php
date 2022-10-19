@@ -19,7 +19,6 @@ class Obat extends Model
         'stok',
         'harga',
         'deskripsi',
-        'komposisi',
         'dosis',
         'aturan_pakai',
         'manufaktur',
