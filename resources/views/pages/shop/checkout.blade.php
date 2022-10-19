@@ -62,7 +62,9 @@
                                         <select class="form-control provinsi-asal" name="provinsi">
                                             <option value="0">Pilih Provinsi</option>
                                             @foreach ($provinces as $province => $value)
-                                                <option value="{{ $province }}">{{ $value }}</option>
+                                                <option value="{{ $province }}"
+                                                    {{ $user['user_address'][0]['provinsi'] == $province ? 'selected' : '' }}>
+                                                    {{ $value }}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -70,11 +72,22 @@
                                         <label class="mt-2">Kota / Kabupaten</label>
                                         <select class="form-control kota-tujuan" name="kota">
                                             <option value="">Pilih Kota / Kabupaten</option>
+                                            @foreach ($city as $key => $name)
+                                                <option value="{{ $key }}"
+                                                    {{ $user['user_address'][0]['kota'] == $key ? 'selected' : '' }}>
+                                                    {{ $name }}</option>
+                                            @endforeach
                                         </select>
                                     </div>
                                     <div class="col-md-12 mt-3">
+                                        <label>Kecamatan</label>
+                                        <input class="form-control" type="text" placeholder="Kecamatan"
+                                            value="{{ old('kecamatan', $user['user_address'][0]['kecamatan']) }}"
+                                            name="kecamatan">
+                                    </div>
+                                    <div class="col-md-12 mt-3">
                                         <label>Alamat Detail</label>
-                                        <textarea class="form-control" placeholder="Alamat" name="alamat_detail"></textarea>
+                                        <textarea class="form-control" placeholder="Alamat" name="alamat_detail">{{ old('kecamatan', $user['user_address'][0]['alamat_detail']) }}</textarea>
                                     </div>
                                     <div class="col-md-12 mt-3">
                                         <label>Kode Pos</label>
@@ -98,11 +111,11 @@
                         <div class="checkout-inner">
                             <div class="checkout-summary">
                                 <h1>Total</h1>
-                                <p>Nama Produk<span>---</span></p>
+                                <p>Nama Produk<span>{{ $obat->nama }}</span></p>
                                 <p class="sub-total">Jumlah Pesanan<span>
                                         <select class="" name="jumlah_pesanan">
-                                            <option value="0" selected>0</option>
-                                            @for ($i = 1; $i <= 10; $i++)
+                                            <option value="1" selected>1</option>
+                                            @for ($i = 2; $i <= 10; $i++)
                                                 <option value="{{ $i }}">{{ $i }}</option>
                                             @endfor
                                         </select>
@@ -291,19 +304,20 @@
                 currency: "IDR"
             }).format(number);
         }
-        var $subtotal = 10000;
+        var subtotal = {{ $obat->harga }};
+        var harga = {{ $obat->harga }};
         document.getElementById("form-total").value = 1;
         document.getElementById("form-ongkir").value = 0;
-        document.getElementById("subtotal").innerHTML = rupiah($subtotal, 'Rp. ');
+        document.getElementById("subtotal").innerHTML = rupiah(subtotal, 'Rp. ');
         $(document).ready(function() {
             $('select[name="jumlah_pesanan"]').on('change', function() {
                 let jumlah = $(this).val();
 
-                $subtotal = jumlah * 10000;
+                subtotal = jumlah * harga;
 
-                document.getElementById("subtotal").innerHTML = rupiah($subtotal, 'Rp. ');
+                document.getElementById("subtotal").innerHTML = rupiah(subtotal, 'Rp. ');
                 if (Number(document.getElementById("form-ongkir").value) > 0) {
-                    $total = Number(document.getElementById("form-ongkir").value) + Number($subtotal);
+                    $total = Number(document.getElementById("form-ongkir").value) + Number(subtotal);
                     document.getElementById("form-total").value = $total;
                     document.getElementById("total").innerHTML = rupiah($total, 'Rp. ');
                 }
@@ -368,7 +382,7 @@
                             ]['0']['cost'][0]['value'], 'Rp. ');
 
                             $total = data[0]['costs']['0']
-                                ['cost'][0]['value'] + Number($subtotal);
+                                ['cost'][0]['value'] + Number(subtotal);
                             document.getElementById("form-total").value = $total;
                             document.getElementById("total").innerHTML = rupiah($total, 'Rp. ');
                         } else {

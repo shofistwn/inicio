@@ -3,10 +3,14 @@
 namespace App\Http\Controllers;
 
 use Exception;
-use App\Models\City;
-use App\Models\Province;
-use App\Models\Transaksi;
-use App\Models\User;
+use App\Models\{
+    City,
+    Obat,
+    Province,
+    Transaksi,
+    User,
+    UserAddress
+};
 use Illuminate\Http\Request;
 use Kavist\RajaOngkir\Facades\RajaOngkir;
 use Illuminate\Support\Facades\Redirect;
@@ -15,12 +19,6 @@ use Midtrans\Snap;
 
 class TransaksiController extends Controller
 {
-    public function ongkir()
-    {
-        $provinces = Province::pluck('name', 'province_id');
-        return view('ongkir', compact('provinces'));
-    }
-
     /**
      * @param $id
      * @return \Illuminate\Http\JsonResponse
@@ -49,9 +47,20 @@ class TransaksiController extends Controller
 
     public function checkout()
     {
-        $user = User::findOrFail(auth()->user()->id);
+        $obat = Obat::findOrFail(1);
+        $user = User::where('id', auth()->user()->id)->with('user_address')->first();
+
+        // jika user address tidak ditemukan akan di set null
+        if (count($user['user_address']) <= 0) {
+            $user['user_address'][0] = [
+                'provinsi' => null,
+                'kecamatan' => null,
+                'alamat_detail' => null,
+            ];
+        }
         $provinces = Province::pluck('name', 'province_id');
-        return view('pages.shop.checkout', compact('user', 'provinces'));
+        $city = City::where('province_id', $user['user_address'][0]['provinsi'])->pluck('name', 'city_id');
+        return view('pages.shop.checkout', compact('user', 'obat', 'provinces', 'city'));
     }
 
     public function payment(Request $request)
@@ -61,6 +70,7 @@ class TransaksiController extends Controller
             'telepon' => 'required',
             'provinsi' => 'required',
             'kota' => 'required',
+            'kecamatan' => 'required',
             'alamat_detail' => 'required',
             'kode_pos' => 'required',
             'jasa_ekspedisi' => 'required',
@@ -81,6 +91,7 @@ class TransaksiController extends Controller
             'telepon' => $request->telepon,
             'provinsi' => $request->provinsi,
             'kota' => $request->kota,
+            'kecamatan' => $request->kecamatan,
             'alamat_detail' => $request->alamat_detail,
             'kode_pos' => $request->kode_pos,
             'jasa_ekspedisi' => $request->jasa_ekspedisi,
@@ -89,6 +100,14 @@ class TransaksiController extends Controller
             'berat_obat' => $request->berat_obat,
             'ongkos_kirim' => $request->ongkos_kirim,
             'total_pembayaran' => $request->total_pembayaran,
+        ]);
+
+        UserAddress::create([
+            'user_id' => $request->user_id,
+            'provinsi' => $request->provinsi,
+            'kota' => $request->kota,
+            'kecamatan' => $request->kecamatan,
+            'alamat_detail' => $request->alamat_detail,
         ]);
 
         Config::$serverKey = config('midtrans.serverKey');
@@ -116,6 +135,7 @@ class TransaksiController extends Controller
             $paymentURL = Snap::createTransaction($midtrans_params)->redirect_url;
 
             return Redirect::to($paymentURL);
+            // return view('pages.shop.midtrans', compact('paymentURL'));
         } catch (Exception $e) {
             echo $e->getMessage();
         }

@@ -17,6 +17,7 @@ class Transaksi extends Model
         'telepon',
         'provinsi',
         'kota',
+        'kecamatan',
         'alamat_detail',
         'no_resi',
         'kode_pos',

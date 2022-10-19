@@ -25,6 +25,7 @@ class CreateTransaksisTable extends Migration
             $table->string('telepon');
             $table->integer('provinsi');
             $table->integer('kota');
+            $table->string('kecamatan');
             $table->string('alamat_detail');
             $table->string('no_resi')->nullable();
             $table->string('kode_pos');
