@@ -119,7 +119,7 @@ class TransaksiController extends Controller
         $transaksi += 1;
         $midtrans_params = [
             'transaction_details' => [
-                'order_id' => 'INV-' . $transaksi,
+                'order_id' => 'INV-' . $transaksi->id . time(),
                 'gross_amount' => $request->total_pembayaran,
             ],
             'customer_details' => [
@@ -127,7 +127,6 @@ class TransaksiController extends Controller
                 'last_name' => 'Setiawan',
                 'email' => 'user@mail.com',
             ],
-            // 'enabled_payments' => ['shopeepay', 'bank_transfer'],
             'vtweb' => []
         ];
 
@@ -135,7 +134,6 @@ class TransaksiController extends Controller
             $paymentURL = Snap::createTransaction($midtrans_params)->redirect_url;
 
             return Redirect::to($paymentURL);
-            // return view('pages.shop.midtrans', compact('paymentURL'));
         } catch (Exception $e) {
             echo $e->getMessage();
         }

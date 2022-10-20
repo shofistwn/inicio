@@ -20,7 +20,7 @@
                 </div>
                 <div class="col-md-3">
                     <div class="user">
-                        <a href="#" class="btn cart">
+                        <a href="{{ route('shop.cart') }}" class="btn cart">
                             <i class="fa fa-shopping-cart"></i>
                             <span>(0)</span>
                         </a>

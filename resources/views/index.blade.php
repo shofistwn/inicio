@@ -14,8 +14,14 @@
                 <div class="navbar-nav ml-auto">
                     <a class="nav-item nav-link active" href="#">Home <span class="sr-only">(current)</span></a>
                     <a class="nav-item nav-link" href="{{ route('shop.index') }}">Shop</a>
-                    <a class="nav-item nav-link" href="{{ route('login') }}">Login</a>
-                    <a class="nav-item nav-link" href="{{ route('register') }}">Registration</a>
+                    @auth
+                        <a class="nav-item nav-link" href="">Profile</a>
+                        <a class="nav-item nav-link" href="">Logout</a>
+                    @endauth
+                    @guest
+                        <a class="nav-item nav-link" href="{{ route('login') }}">Login</a>
+                        <a class="nav-item nav-link" href="{{ route('register') }}">Registration</a>
+                    @endguest
                 </div>
             </div>
         </div>
@@ -41,7 +47,7 @@
                     </div>
                     <div class="col-sm">
                         <img src="assets/img/toko2.webp" alt="HiRes" class="img-fluid float-left">
-                        <a class="navbar-brand1" href="shop.html">Toko Kesehatan</a>
+                        <a class="navbar-brand1" href="{{ route('shop.index') }}">Toko Kesehatan</a>
                         <p>Klik untuk informasi lebih lanjut</p>
                     </div>
                     <div class="col-sm">

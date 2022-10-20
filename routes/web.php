@@ -32,7 +32,7 @@ Route::get('/shop', function () {
 })->name('shop.index');
 Route::get('/cart', function () {
     return view('pages.shop.cart');
-});
+})->name('shop.cart');
 
 Auth::routes();
 
