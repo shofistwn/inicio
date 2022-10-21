@@ -15,7 +15,7 @@
                     <a class="nav-item nav-link active" href="#">Home <span class="sr-only">(current)</span></a>
                     <a class="nav-item nav-link" href="{{ route('shop.index') }}">Shop</a>
                     @auth
-                        <a class="nav-item nav-link" href="">Profile</a>
+                        <a class="nav-item nav-link" href="{{ route('user.profile') }}">Profile</a>
                         <a class="nav-item nav-link" href="">Logout</a>
                     @endauth
                     @guest
@@ -29,9 +29,11 @@
 
     <div class="jumbotron jumbotron-fluid">
         <div class="container">
-            <h1 class="display-4">Di Dalam <span>Tubuh</span> yang<span> Sehat</span><br>Terdapat<span> Jiwa </span>yang
-                <span>Kuat</span>
-            </h1>
+            <center>
+                <h1 class="display-4">Di Dalam <span>Tubuh</span> yang<span> Sehat</span><br>Terdapat<span> Jiwa </span>yang
+                    <span>Kuat</span>
+                </h1>
+            </center>
         </div>
     </div>
 

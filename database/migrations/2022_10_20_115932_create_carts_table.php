@@ -1,11 +1,12 @@
 <?php
 
+use App\Models\Product;
 use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateUserAddressesTable extends Migration
+class CreateCartsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,14 +15,11 @@ class CreateUserAddressesTable extends Migration
      */
     public function up()
     {
-        Schema::create('user_addresses', function (Blueprint $table) {
+        Schema::create('carts', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(User::class);
-            $table->integer('provinsi');
-            $table->integer('kota');
-            $table->string('kecamatan');
-            $table->string('alamat_detail');
-            $table->string('kode_pos');
+            $table->foreignIdFor(Product::class);
+            $table->string('quantity');
             $table->timestamps();
         });
     }
@@ -33,6 +31,6 @@ class CreateUserAddressesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('user_addresses');
+        Schema::dropIfExists('carts');
     }
 }

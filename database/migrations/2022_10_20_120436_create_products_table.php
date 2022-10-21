@@ -5,7 +5,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateEventsTable extends Migration
+class CreateProductsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,16 +14,17 @@ class CreateEventsTable extends Migration
      */
     public function up()
     {
-        Schema::create('events', function (Blueprint $table) {
+        Schema::create('products', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(User::class);
             $table->string('foto');
-            $table->string('judul');
+            $table->string('nama');
             $table->string('slug');
-            $table->string('lokasi');
-            $table->longText('konten');
-            $table->timestamp('mulai');
-            $table->timestamp('selesai')->nullable();
+            $table->string('kategori');
+            $table->decimal('harga');
+            $table->integer('stok');
+            $table->integer('berat');
+            $table->longText('deskripsi');
             $table->timestamps();
         });
     }
@@ -35,6 +36,6 @@ class CreateEventsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('events');
+        Schema::dropIfExists('products');
     }
 }

@@ -5,19 +5,20 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Event extends Model
+class Product extends Model
 {
     use HasFactory;
 
     protected $fillable = [
         'user_id',
         'foto',
-        'judul',
+        'nama',
         'slug',
-        'lokasi',
-        'konten',
-        'mulai',
-        'selesai',
+        'kategori',
+        'harga',
+        'stok',
+        'berat',
+        'deskripsi'
     ];
 
     public function user()

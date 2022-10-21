@@ -37,26 +37,32 @@
                                     </tr>
                                 </thead>
                                 <tbody class="align-middle">
-                                    <tr>
-                                        <td>
-                                            <div class="img">
-                                                <a href="#"><img src="" alt="Image"></a>
-                                                <p>Nama Produk</p>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="qty">
-                                                <button class="btn-minus"><i class="fa fa-minus"></i></button>
-                                                <input type="text" value="1">
-                                                <button class="btn-plus"><i class="fa fa-plus"></i></button>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <button>
-                                                <i class="fa fa-trash"></i>
-                                            </button>
-                                        </td>
-                                    </tr>
+                                    @forelse ($products as $product)
+                                        <tr>
+                                            <td>
+                                                <div class="img">
+                                                    <a href="#"><img src="" alt="Image"></a>
+                                                    <p>{{ $product['product']['nama'] }}</p>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="qty">
+                                                    <button class="btn-minus"><i class="fa fa-minus"></i></button>
+                                                    <input type="text" value="{{ $product->quantity }}">
+                                                    <button class="btn-plus"><i class="fa fa-plus"></i></button>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <button>
+                                                    <i class="fa fa-trash"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    @empty
+                                        <tr>
+                                            <td colspan="3">Kosong!</td>
+                                        </tr>
+                                    @endforelse
                                 </tbody>
                             </table>
                         </div>
@@ -69,13 +75,13 @@
                                 <div class="cart">
                                     <div class="cart-content">
                                         <h1>Pembayaran</h1>
-                                        <p>Sub Total<span>Rp---</span></p>
-                                        <p>Ongkir<span>Rp---</span></p>
                                         <h2>Total<span>Rp---</span></h2>
                                     </div>
                                     <div class="cart-btn">
-                                        <button>Batal</button>
-                                        <button>Checkout</button>
+                                        <a href="{{ route('shop.index') }}">
+                                            <button>Batal</button>
+                                        </a>
+                                        <a href="{{ route('shop.checkout') }}"><button>Checkout</button></a>
                                     </div>
                                 </div>
                             </div>

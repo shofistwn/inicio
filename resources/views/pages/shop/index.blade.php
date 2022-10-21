@@ -2,6 +2,37 @@
 
 @section('title', 'Category')
 @section('content')
+    <style>
+        .button1 {
+            width: 40%;
+            padding: 0px 5px 5px 0px;
+            height: 40%;
+            background-color: white;
+            color: black;
+            border: 2px solid #f1f1f1;
+            transition: 0.3ms;
+        }
+
+        .button1:hover {
+            background-color: #00b3ff;
+        }
+
+        .button2 {
+            text-align: center;
+            width: 40%;
+            padding: 0px 5px 5px 0px;
+            height: 40%;
+            background-color: white;
+            color: black;
+            border: 2px solid #f1f1f1;
+            transition: 0.3ms;
+        }
+
+        .button2:hover {
+            background-color: #62ACCC;
+        }
+    </style>
+
     <div class="bottom-bar">
         <div class="container-fluid">
             <div class="row align-items-center">
@@ -20,7 +51,7 @@
                 </div>
                 <div class="col-md-3">
                     <div class="user">
-                        <a href="{{ route('shop.cart') }}" class="btn cart">
+                        <a href="#" class="btn cart">
                             <i class="fa fa-shopping-cart"></i>
                             <span>(0)</span>
                         </a>
@@ -34,85 +65,39 @@
         <div class="categori">
             <div class="card-header">
                 <div class="category-title text-center">
-                    <h1>Jelajahi Obat</h1>
+                    <h1>Jelajahi Alat</h1>
                 </div>
                 <div class="card-body">
                     <div class="container">
                         <div class="row">
-                            <div class="card categori_row">
-                                <img src="{{ asset('assets/img/obat/acetylcysteine.webp') }}">
-                                <div class="container">
-                                    <h4><b>1</b></h4>
-                                    <p>Architect & Engineer</p>
+
+                            @forelse ($products as $product)
+                                <div class="col-sm-3">
+                                    <div class="card">
+                                        <img src="{{ asset('assets/img/obat/acetylcysteine.webp') }}">
+                                        <div class="container">
+                                            <h4 href="{{ route('produk.show', $product->id) }}">{{ $product->nama }}</h4>
+                                            <div class="row">
+                                                <a href="{{ route('produk.show', $product->id) }}" class="button button1 mb-3 ml-3">Detail</a>
+                                                <a class="button button2 mb-3 ml-3" href="">Beli</a>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="card categori_row ml-3">
-                                <img src="{{ asset('assets/img/obat/mucopect.webp') }}">
-                                <div class="container">
-                                    <h4><b>2</b></h4>
-                                    <p>Architect & Engineer</p>
-                                </div>
-                            </div>
-                            <div class="card categori_row ml-3">
-                                <img src="{{ asset('assets/img/obat/panadolcold.webp') }}">
-                                <div class="container">
-                                    <h4><b>3</b></h4>
-                                    <p>Architect & Engineer</p>
-                                </div>
-                            </div>
-                            <div class="card categori_row ml-3">
-                                <img src="{{ asset('assets/img/obat/epexol.webp') }}">
-                                <div class="container">
-                                    <h4><b>4</b></h4>
-                                    <p>Architect & Engineer</p>
-                                </div>
-                            </div>
-                            <div class="card categori_row">
-                                <img src="{{ asset('assets/img/obat/paratusin.webp') }}">
-                                <div div class="container">
-                                    <h4><b>5</b></h4>
-                                    <p>Architect & Engineer</p>
-                                </div>
-                            </div>
-                            <div class="card categori_row ml-3">
-                                <img src="{{ asset('assets/img/obat/rhinosjunior.webp') }}">
-                                <div class="container">
-                                    <h4><b>6</b></h4>
-                                    <p>Architect & Engineer</p>
-                                </div>
-                            </div>
-                            <div class="card categori_row ml-3">
-                                <img src="{{ asset('assets/img/obat/rhinosSR.webp') }}">
-                                <div class="container">
-                                    <h4><b>7</b></h4>
-                                    <p>Architect & Engineer</p>
-                                </div>
-                            </div>
-                            <div class="card categori_row ml-3">
-                                <img src="{{ asset('assets/img/obat/sanadryl.webp') }}">
-                                <div class="container">
-                                    <h4><b>8</b></h4>
-                                    <p>Architect & Engineer</p>
-                                </div>
-                            </div>
-                            <div class="card categori_row">
-                                <img src="{{ asset('assets/img/obat/silex.webp') }}">
-                                <div class="container">
-                                    <h4><b>9</b></h4>
-                                    <p>Architect & Engineer</p>
-                                </div>
-                            </div>
-                            <div class="card categori_row ml-3">
-                                <img src="{{ asset('assets/img/obat/tremenza.webp') }}">
-                                <div class="container">
-                                    <h4><b>10</b></h4>
-                                    <p>Architect & Engineer</p>
-                                </div>
-                            </div>
+                            @empty
+                            @endforelse
                         </div>
+                    </div>
+                    <div class="pagination ml-auto">
+                        <a href="#">&laquo;</a>
+                        <a href="#">1</a>
+                        <a href="#" class="active">2</a>
+                        <a href="#">3</a>
+                        <a href="#">&raquo;</a>
                     </div>
                 </div>
             </div>
         </div>
     </section>
+
 @endsection
