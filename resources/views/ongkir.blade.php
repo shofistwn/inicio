@@ -193,14 +193,17 @@
                     },
                     dataType: "JSON",
                     type: "POST",
-                    success: function(response) {
+                    success: function(data) {
                         isProcessing = false;
-                        if (response) {
+                        if (data) {
+                            console.log(data[0]['costs']['0']['cost'][0]['value']);
+
+
                             $('#ongkir').empty();
                             $('.ongkir').addClass('d-block');
-                            $.each(response[0]['costs'], function(key, value) {
+                            $.each(data[0]['costs'], function(key, value) {
                                 $('#ongkir').append('<li class="list-group-item">' +
-                                    response[0].code.toUpperCase() + ' : <strong>' +
+                                    data[0].code.toUpperCase() + ' : <strong>' +
                                     value.service + '</strong> - Rp. ' + value.cost[
                                         0].value + ' (' + value.cost[0].etd +
                                     ' hari)</li>')

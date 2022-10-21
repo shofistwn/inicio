@@ -44,6 +44,11 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    public function user_address()
+    {
+        return $this->belongsTo(UserAddress::class);
+    }
+
     public function blog()
     {
         return $this->hasMany(Blog::class);
@@ -57,5 +62,10 @@ class User extends Authenticatable
     public function obat()
     {
         return $this->hasMany(Obat::class);
+    }
+
+    public function product()
+    {
+        return $this->hasMany(Product::class);
     }
 }
