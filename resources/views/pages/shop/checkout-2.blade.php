@@ -111,16 +111,6 @@
                         <div class="checkout-inner">
                             <div class="checkout-summary">
                                 <h1>Total</h1>
-                                <p>Nama Produk<span>{{ $product['nama'] }}</span></p>
-                                <p class="sub-total">Jumlah Pesanan<span>
-                                        <select class="" name="jumlah_pesanan">
-                                            <option value="1" selected>1</option>
-                                            @for ($i = 2; $i <= 10; $i++)
-                                                <option value="{{ $i }}">{{ $i }}</option>
-                                            @endfor
-                                        </select>
-                                    </span>
-                                </p>
                                 <p class="sub-total">Sub Total<span id="subtotal">---</span></p>
                                 <p class="ship-cost">Ongkir<span id="ongkir">---</span></p>
                                 <h2>Total Bayar<span id="total">---</span></h2>
@@ -304,24 +294,11 @@
                 currency: "IDR"
             }).format(number);
         }
-        var subtotal = {{ $product->harga }};
-        var harga = {{ $product->harga }};
+        var subtotal = {{ $subTotal }};
         document.getElementById("form-total").value = 1;
         document.getElementById("form-ongkir").value = 0;
         document.getElementById("subtotal").innerHTML = rupiah(subtotal, 'Rp. ');
         $(document).ready(function() {
-            $('select[name="jumlah_pesanan"]').on('change', function() {
-                let jumlah = $(this).val();
-
-                subtotal = jumlah * harga;
-
-                document.getElementById("subtotal").innerHTML = rupiah(subtotal, 'Rp. ');
-                if (Number(document.getElementById("form-ongkir").value) > 0) {
-                    $total = Number(document.getElementById("form-ongkir").value) + Number(subtotal);
-                    document.getElementById("form-total").value = $total;
-                    document.getElementById("total").innerHTML = rupiah($total, 'Rp. ');
-                }
-            });
             //ajax select kota asal
             $('select[name="provinsi"]').on('change', function() {
                 let provindeId = $(this).val();

@@ -28,6 +28,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('index');
 })->name('beranda');
+Route::get('/tes', function () {
+    return view('pages.artikel.create');
+});
 
 Auth::routes();
 
@@ -63,7 +66,8 @@ Route::middleware('auth')->group(function () {
     Route::put('/user', [HomeController::class, 'update'])->name('user.update');
 
     Route::get('/cart', [CartController::class, 'index'])->name('shop.cart');
-    Route::get('/checkout', [TransaksiController::class, 'checkout'])->name('shop.checkout');
+    Route::get('/checkout/{id}', [TransaksiController::class, 'checkout'])->name('shop.checkout');
+    Route::get('/checkout', [TransaksiController::class, 'checkout2'])->name('shop.checkout2');
     Route::post('/payment', [TransaksiController::class, 'payment'])->name('payment');
 
     Route::get('/midtrans/finish', function () {

@@ -81,7 +81,7 @@
                                         <a href="{{ route('shop.index') }}">
                                             <button>Batal</button>
                                         </a>
-                                        <a href="{{ route('shop.checkout') }}"><button>Checkout</button></a>
+                                        <a href="{{ route('shop.checkout2') }}"><button>Checkout</button></a>
                                     </div>
                                 </div>
                             </div>

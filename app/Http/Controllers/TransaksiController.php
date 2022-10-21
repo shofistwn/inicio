@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Exception;
 use App\Models\{
+    Cart,
     City,
     Obat,
     Product,
@@ -13,10 +14,12 @@ use App\Models\{
     UserAddress
 };
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Kavist\RajaOngkir\Facades\RajaOngkir;
 use Illuminate\Support\Facades\Redirect;
 use Midtrans\Config;
 use Midtrans\Snap;
+use Psy\CodeCleaner\ReturnTypePass;
 
 class TransaksiController extends Controller
 {
@@ -46,22 +49,65 @@ class TransaksiController extends Controller
         return response()->json($cost);
     }
 
-    public function checkout()
+    public function checkout($id)
     {
-        $product = Product::findOrFail(1);
-        $user = User::where('id', auth()->user()->id)->with('user_address')->first();
+        $product = Product::find($id);
 
-        // jika user address tidak ditemukan akan di set null
-        if (count($user['user_address']) <= 0) {
-            $user['user_address'][0] = [
-                'provinsi' => null,
-                'kecamatan' => null,
-                'alamat_detail' => null,
-            ];
+        $user = User::where('id', auth()->user()->id)->with('user_address')->first()->toArray();
+        $userAddress = UserAddress::where('user_id', $user['id'])->first();
+
+        if (!isset($user['user_address'])) {
+            if (!isset($userAddress)) {
+                $user['user_address']['provinsi'] = null;
+                $user['user_address']['kota'] = null;
+                $user['user_address']['kecamatan'] = null;
+                $user['user_address']['alamat_detail'] = null;
+            } else {
+                $user['user_address']['provinsi'] = $userAddress->provinsi;
+                $user['user_address']['kota'] = $userAddress->kota;
+                $user['user_address']['kecamatan'] = $userAddress->kecamatan;
+                $user['user_address']['alamat_detail'] = $userAddress->alamat_detail;
+            }
         }
+
         $provinces = Province::pluck('name', 'province_id');
-        $city = City::where('province_id', $user['user_address'][0]['provinsi'])->pluck('name', 'city_id');
+        $city = City::where('province_id', $user['user_address']['provinsi'])->pluck('name', 'city_id');
         return view('pages.shop.checkout', compact('user', 'product', 'provinces', 'city'));
+    }
+
+    public function checkout2()
+    {
+        $products = DB::table('products')
+            ->join('carts', 'products.id', '=', 'carts.product_id')
+            ->where('carts.user_id', auth()->user()->id)
+            ->get();
+
+        $total = [];
+        foreach ($products as $key => $value) {
+            $total[$key] = $value->quantity * $value->harga;
+        }
+        $subTotal = array_sum($total);
+
+        $user = User::where('id', auth()->user()->id)->with('user_address')->first()->toArray();
+        $userAddress = UserAddress::where('user_id', $user['id'])->first();
+
+        if (!isset($user['user_address'])) {
+            if (!isset($userAddress)) {
+                $user['user_address']['provinsi'] = null;
+                $user['user_address']['kota'] = null;
+                $user['user_address']['kecamatan'] = null;
+                $user['user_address']['alamat_detail'] = null;
+            } else {
+                $user['user_address']['provinsi'] = $userAddress->provinsi;
+                $user['user_address']['kota'] = $userAddress->kota;
+                $user['user_address']['kecamatan'] = $userAddress->kecamatan;
+                $user['user_address']['alamat_detail'] = $userAddress->alamat_detail;
+            }
+        }
+
+        $provinces = Province::pluck('name', 'province_id');
+        $city = City::where('province_id', $user['user_address']['provinsi'])->pluck('name', 'city_id');
+        return view('pages.shop.checkout-2', compact('user', 'subTotal', 'provinces', 'city'));
     }
 
     public function payment(Request $request)
