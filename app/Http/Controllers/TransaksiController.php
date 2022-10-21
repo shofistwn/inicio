@@ -268,6 +268,8 @@ class TransaksiController extends Controller
             'telepon' => $request->telepon,
         ]);
 
+        Cart::where('user_id', $user->id)->delete();
+
         Config::$serverKey = config('midtrans.serverKey');
         Config::$isProduction = config('midtrans.isProduction');
         Config::$isSanitized = config('midtrans.isSanitized');

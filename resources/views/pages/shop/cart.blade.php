@@ -25,67 +25,68 @@
     <div class="cart-page">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-lg-8">
+                <div class="col">
                     <div class="cart-page-inner">
-                        <div class="table-responsive">
-                            <table class="table table-bordered">
-                                <thead class="thead-dark">
-                                    <tr>
-                                        <th>Product</th>
-                                        <th>Jumlah</th>
-                                        <th>Hapus</th>
-                                    </tr>
-                                </thead>
-                                <tbody class="align-middle">
-                                    @forelse ($products as $product)
+
+                        <form action="{{ route('shop.store') }}" method="post">
+                            @csrf
+                            <div class="table-responsive">
+                                <table class="table table-bordered">
+                                    <thead class="thead-dark">
                                         <tr>
-                                            <td>
-                                                <div class="img">
-                                                    <a href="#"><img src="" alt="Image"></a>
-                                                    <p>{{ $product['product']['nama'] }}</p>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="qty">
-                                                    <button class="btn-minus"><i class="fa fa-minus"></i></button>
-                                                    <input type="text" value="{{ $product->quantity }}">
-                                                    <button class="btn-plus"><i class="fa fa-plus"></i></button>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <button>
-                                                    <i class="fa fa-trash"></i>
-                                                </button>
-                                            </td>
+                                            <th>Product</th>
+                                            <th>Jumlah</th>
+                                            <th>Hapus</th>
                                         </tr>
-                                    @empty
-                                        <tr>
-                                            <td colspan="3">Kosong!</td>
-                                        </tr>
-                                    @endforelse
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="cart-page-inner">
-                        <div class="row">
-                            <div class="col-md-12">
+                                    </thead>
+                                    <tbody class="align-middle">
+                                        @forelse ($products as $product)
+                                        <input type="text" name="ids[]" value="{{ $product->id }}" hidden>
+                                            <tr>
+                                                <td>
+                                                    <div class="img">
+                                                        <a href="#"><img src="" alt="Image"></a>
+                                                        <p>{{ $product['product']['nama'] }}</p>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="qty">
+                                                        <select class="form-control" name="quantities[]">
+                                                            <option value="1" selected>1</option>
+                                                            @for ($i = 2; $i <= 10; $i++)
+                                                                <option value="{{ $i }}">{{ $i }}
+                                                                </option>
+                                                            @endfor
+                                                        </select>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <button>
+                                                        <i class="fa fa-trash"></i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        @empty
+                                            <tr>
+                                                <td colspan="3">Kosong!</td>
+                                            </tr>
+                                        @endforelse
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <div class="col-4 mx-auto">
                                 <div class="cart">
-                                    <div class="cart-content">
-                                        <h1>Pembayaran</h1>
-                                        <h2>Total<span>Rp---</span></h2>
-                                    </div>
                                     <div class="cart-btn">
                                         <a href="{{ route('shop.index') }}">
                                             <button>Batal</button>
                                         </a>
-                                        <a href="{{ route('shop.checkout2') }}"><button>Checkout</button></a>
+                                        <button type="submit">Checkout</button>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </form>
+
                     </div>
                 </div>
             </div>

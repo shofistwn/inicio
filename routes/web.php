@@ -76,8 +76,10 @@ Route::middleware('auth')->group(function () {
     Route::put('/user', [HomeController::class, 'update'])->name('user.update');
 
     Route::get('/cart', [CartController::class, 'index'])->name('shop.cart');
+    Route::post('/cart', [CartController::class, 'store'])->name('shop.store');
     Route::get('/checkout/{id}', [TransaksiController::class, 'checkout'])->name('shop.checkout');
     Route::get('/checkout', [TransaksiController::class, 'checkout2'])->name('shop.checkout2');
+
     Route::post('/payment/{id}', [TransaksiController::class, 'payment'])->name('payment');
     Route::post('/payment', [TransaksiController::class, 'payment2'])->name('payment2');
 

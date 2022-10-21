@@ -13,8 +13,28 @@ class CartController extends Controller
         return view('pages.shop.cart', compact('products'));
     }
 
+    public function store(Request $request)
+    {
+        // dd($request->all());
+        $request->validate([
+            'ids' => 'required',
+            'quantities' => 'required',
+        ]);
+
+        foreach ($request['ids'] as $key => $id) {
+            Cart::where('user_id', auth()->user()->id)
+            ->where('product_id', $id)
+            ->update([
+                'quantity' => $request['quantities'][$key]
+            ]);
+        }
+
+        return redirect()->route('shop.checkout2');
+    }
+
     public function destroy($id)
     {
         Cart::find($id)->delete();
+        return redirect()->route('shop.cart');
     }
 }

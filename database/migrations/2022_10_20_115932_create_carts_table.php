@@ -19,7 +19,7 @@ class CreateCartsTable extends Migration
             $table->id();
             $table->foreignIdFor(User::class);
             $table->foreignIdFor(Product::class);
-            $table->string('quantity');
+            $table->integer('quantity')->default(1);
             $table->timestamps();
         });
     }
