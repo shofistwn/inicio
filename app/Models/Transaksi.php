@@ -12,21 +12,23 @@ class Transaksi extends Model
     protected $table = 'transaksi';
     protected $fillable = [
         'user_id',
-        'obat_id',
-        'nama_penerima',
-        'telepon',
-        'provinsi',
-        'kota',
-        'kecamatan',
-        'alamat_detail',
+        'product_id',
         'no_resi',
-        'kode_pos',
         'jasa_ekspedisi',
-        'harga_obat',
-        'berat_obat',
         'jumlah_pesanan',
+        'subtotal',
         'ongkos_kirim',
         'total_pembayaran',
         'status_pembayaran',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function product()
+    {
+        return $this->belongsTo(Product::class);
+    }
 }

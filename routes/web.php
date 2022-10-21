@@ -28,9 +28,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('index');
 })->name('beranda');
-Route::get('/tes', function () {
-    return view('pages.artikel.create');
-});
 
 Auth::routes();
 
@@ -58,6 +55,19 @@ Route::post('/midtrans/notification', [MidtransController::class, 'receive']);
 // shop
 Route::get('/shop', [ProductController::class, 'index'])->name('shop.index');
 
+Route::controller(ProductController::class)
+->prefix('produk')
+->name('produk.')
+->group(function () {
+    // Route::get('/', 'index')->name('index');
+    // Route::get('/create', 'create')->name('create');
+    // Route::get('/', 'store')->name('store');
+    Route::get('/{id}', 'show')->name('show');
+    // Route::get('/{id}/edit', 'edit')->name('edit');
+    // Route::put('/{id}', 'update')->name('update');
+    // Route::delete('/{id}', 'destroy')->name('destroy');
+});
+
 Route::middleware('auth')->group(function () {
     Route::resource('/blog', BlogController::class);
 
@@ -68,7 +78,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/cart', [CartController::class, 'index'])->name('shop.cart');
     Route::get('/checkout/{id}', [TransaksiController::class, 'checkout'])->name('shop.checkout');
     Route::get('/checkout', [TransaksiController::class, 'checkout2'])->name('shop.checkout2');
-    Route::post('/payment', [TransaksiController::class, 'payment'])->name('payment');
+    Route::post('/payment/{id}', [TransaksiController::class, 'payment'])->name('payment');
+    Route::post('/payment', [TransaksiController::class, 'payment2'])->name('payment2');
 
     Route::get('/midtrans/finish', function () {
         echo 'finish';
@@ -82,7 +93,7 @@ Route::middleware('auth')->group(function () {
                 // Route::get('/', 'index')->name('index');
                 Route::get('/create', 'create')->name('create');
                 Route::get('/', 'store')->name('store');
-                Route::get('/{id}', 'show')->name('show');
+                // Route::get('/{id}', 'show')->name('show');
                 Route::get('/{id}/edit', 'edit')->name('edit');
                 Route::put('/{id}', 'update')->name('update');
                 Route::delete('/{id}', 'destroy')->name('destroy');

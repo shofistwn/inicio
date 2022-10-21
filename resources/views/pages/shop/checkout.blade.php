@@ -35,7 +35,7 @@
     <div class="checkout">
         <div class="container-fluid">
 
-            <form action="{{ route('payment') }}" method="post">
+            <form action="{{ route('payment', $product->id) }}" method="post">
                 @csrf
 
                 <div class="row">
@@ -50,7 +50,7 @@
                                     <div class="col-md-12 mt-3">
                                         <label>Nama Penerima</label>
                                         <input class="form-control" type="text" placeholder="Nama Lengkap"
-                                            value="{{ old('nama_penerima', $user['nama']) }}" name="nama_penerima">
+                                            value="{{ old('nama', $user['nama']) }}" name="nama">
                                     </div>
                                     <div class="col-md-12 mt-3">
                                         <label>Telepon</label>
@@ -87,12 +87,12 @@
                                     </div>
                                     <div class="col-md-12 mt-3">
                                         <label>Alamat Detail</label>
-                                        <textarea class="form-control" placeholder="Alamat" name="alamat_detail">{{ old('kecamatan', $user['user_address']['alamat_detail']) }}</textarea>
+                                        <textarea class="form-control" placeholder="Alamat" name="alamat_detail">{{ old('alamat_detail', $user['user_address']['alamat_detail']) }}</textarea>
                                     </div>
                                     <div class="col-md-12 mt-3">
                                         <label>Kode Pos</label>
                                         <input class="form-control" type="number" placeholder="Kode Pos"
-                                            name="kode_pos">
+                                            name="kode_pos" value="{{ old('kode_pos', $user['user_address']['kode_pos']) }}">
                                     </div>
                                     <div class="col-md-12 mt-3">
                                         <label class="mt-2">Jasa Ekspedisi</label>
