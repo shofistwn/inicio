@@ -6,6 +6,7 @@ use Exception;
 use App\Models\{
     City,
     Obat,
+    Product,
     Province,
     Transaksi,
     User,
@@ -47,7 +48,7 @@ class TransaksiController extends Controller
 
     public function checkout()
     {
-        $obat = Obat::findOrFail(1);
+        $product = Product::findOrFail(1);
         $user = User::where('id', auth()->user()->id)->with('user_address')->first();
 
         // jika user address tidak ditemukan akan di set null
@@ -60,7 +61,7 @@ class TransaksiController extends Controller
         }
         $provinces = Province::pluck('name', 'province_id');
         $city = City::where('province_id', $user['user_address'][0]['provinsi'])->pluck('name', 'city_id');
-        return view('pages.shop.checkout', compact('user', 'obat', 'provinces', 'city'));
+        return view('pages.shop.checkout', compact('user', 'product', 'provinces', 'city'));
     }
 
     public function payment(Request $request)

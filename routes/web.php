@@ -1,11 +1,12 @@
 <?php
 
 use App\Http\Controllers\{
+    HomeController,
     BlogController,
+    CartController,
     TransaksiController,
-    EventController,
-    ObatController,
-    MidtransController
+    MidtransController,
+    ProductController
 };
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -26,13 +27,7 @@ use Illuminate\Support\Facades\Route;
 // });
 Route::get('/', function () {
     return view('index');
-});
-Route::get('/shop', function () {
-    return view('pages.shop.index');
-})->name('shop.index');
-Route::get('/cart', function () {
-    return view('pages.shop.cart');
-})->name('shop.cart');
+})->name('beranda');
 
 Auth::routes();
 
@@ -50,27 +45,49 @@ Route::get('pelanggan-page', function () {
     return 'Halaman untuk pelanggan';
 })->middleware('role:pelanggan')->name('pelanggan.page');
 
+// api rajaongkir
 Route::post('/ongkir', [TransaksiController::class, 'check_ongkir']);
 Route::get('/cities/{province_id}', [TransaksiController::class, 'getCities']);
+
+// response midtrans
 Route::post('/midtrans/notification', [MidtransController::class, 'receive']);
+
+// shop
+Route::get('/shop', [ProductController::class, 'index'])->name('shop.index');
 
 Route::middleware('auth')->group(function () {
     Route::resource('/blog', BlogController::class);
-    Route::resource('/event', EventController::class);
-    Route::resource('/obat', ObatController::class);
 
-    Route::get('/checkout', [TransaksiController::class, 'checkout']);
+    // user
+    Route::get('/user', [HomeController::class, 'edit'])->name('user.profile');
+    Route::put('/user', [HomeController::class, 'update'])->name('user.update');
+
+    Route::get('/cart', [CartController::class, 'index'])->name('shop.cart');
+    Route::get('/checkout', [TransaksiController::class, 'checkout'])->name('shop.checkout');
     Route::post('/payment', [TransaksiController::class, 'payment'])->name('payment');
+
     Route::get('/midtrans/finish', function () {
         echo 'finish';
+    });
+
+    Route::middleware('role:admin|pegawai')->group(function () {
+        Route::controller(ProductController::class)
+            ->prefix('produk')
+            ->name('produk.')
+            ->group(function () {
+                // Route::get('/', 'index')->name('index');
+                Route::get('/create', 'create')->name('create');
+                Route::get('/', 'store')->name('store');
+                Route::get('/{id}', 'show')->name('show');
+                Route::get('/{id}/edit', 'edit')->name('edit');
+                Route::put('/{id}', 'update')->name('update');
+                Route::delete('/{id}', 'destroy')->name('destroy');
+            });
     });
 
     Route::middleware('role:admin')->group(function () {
     });
 
     Route::middleware('role:pegawai')->group(function () {
-    });
-
-    Route::middleware('role:pelanggan')->group(function () {
     });
 });

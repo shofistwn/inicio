@@ -46,7 +46,7 @@ class User extends Authenticatable
 
     public function user_address()
     {
-        return $this->hasMany(UserAddress::class);
+        return $this->belongsTo(UserAddress::class);
     }
 
     public function blog()
@@ -62,5 +62,10 @@ class User extends Authenticatable
     public function obat()
     {
         return $this->hasMany(Obat::class);
+    }
+
+    public function product()
+    {
+        return $this->hasMany(Product::class);
     }
 }

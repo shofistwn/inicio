@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Event;
+use App\Models\Product;
+use GuzzleHttp\Handler\Proxy;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Str;
 
-class EventController extends Controller
+class ProductController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,12 +15,8 @@ class EventController extends Controller
      */
     public function index()
     {
-        $events = Event::with('user')->get();
-        return response()->json([
-            'success' => true,
-            'message' => 'Daftar Data Event',
-            'data' => $events
-        ], 200);
+        $products = Product::paginate(8);
+        return view('pages.shop.index', compact('products'));
     }
 
     /**
@@ -31,7 +26,7 @@ class EventController extends Controller
      */
     public function create()
     {
-        return view('pages.event.create');
+        return view('pages.product.create');
     }
 
     /**
@@ -44,17 +39,17 @@ class EventController extends Controller
     {
         $request->validate([
             'foto' => 'required|image|mimes:png,jpg,jpeg',
-            'judul' => 'required',
-            'slug' => '',
-            'mulai' => 'required',
-            'selesai' => '',
-            'lokasi' => 'required',
-            'konten' => 'required',
+            'nama' => 'required',
+            'kategori' => 'required',
+            'harga' => 'required',
+            'stok' => 'required',
+            'berat' => 'required',
+            'deskripsi' => 'required',
         ]);
 
-        $konten = $request->konten;
+        $deskripsi = $request->deskripsi;
         $dom = new \DomDocument();
-        $dom->loadHtml($konten, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+        $dom->loadHtml($deskripsi, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
         $imageFile = $dom->getElementsByTagName('imageFile');
 
         foreach ($imageFile as $item => $image) {
@@ -71,66 +66,69 @@ class EventController extends Controller
         }
 
         $foto = $request->file('foto');
-        $foto->storeAs('public/event', time() . $foto->hashName());
+        $foto->storeAs('public/product', time() . $foto->hashName());
 
-        Event::create([
+        Product::create([
             'user_id' => auth()->user()->id,
+            'slug' => \Str::slug($request->nama),
             'foto' => time() . $foto->hashName(),
-            'judul' => $request->judul,
-            'slug' => Str::slug($request->judul),
-            'mulai' => $request->mulai,
-            'selesai' => $request->selesai,
-            'lokasi' => $request->lokasi,
-            'konten' => $dom->saveHTML()
+            'nama' => $request->nama,
+            'kategori' => $request->kategori,
+            'stok' => $request->stok,
+            'harga' => $request->harga,
+            'deskripsi' => $dom->saveHTML(),
+            'berat' => $request->berat,
         ]);
 
-        return redirect()->route('event.index');
+        return view('pages.shop.index');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Event  $event
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Event $event)
+    public function show($id)
     {
-        //
+        $product = Product::find($id);
+        return response()->json($product);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Event  $event
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Event $event)
+    public function edit($id)
     {
-        return view('pages.event.edit', compact('event'));
+        $product = Product::find($id);
+        return view('pages.product.edit', compact('product'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Event  $event
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Event $event)
+    public function update(Request $request, $id)
     {
         $request->validate([
             'foto' => 'image|mimes:png,jpg,jpeg',
-            'judul' => 'required',
-            'slug' => '',
-            'mulai' => 'required',
-            'selesai' => '',
-            'lokasi' => 'required',
-            'konten' => 'required',
+            'nama' => 'required',
+            'kategori' => 'required',
+            'harga' => 'required',
+            'stok' => 'required',
+            'berat' => 'required',
+            'deskripsi' => 'required',
         ]);
 
-        $konten = $request->konten;
+        $deskripsi = $request->deskripsi;
         $dom = new \DomDocument();
-        $dom->loadHtml($konten, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+        $dom->loadHtml($deskripsi, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
         $imageFile = $dom->getElementsByTagName('imageFile');
 
         foreach ($imageFile as $item => $image) {
@@ -146,47 +144,46 @@ class EventController extends Controller
             $image->setAttribute('src', $image_name);
         }
 
+        $product = Product::find($id);
         if ($request->file('foto') == "") {
-            $event->update([
+            $product->update([
                 'user_id' => auth()->user()->id,
-                'judul' => $request->judul,
-                'slug' => Str::slug($request->judul),
-                'mulai' => $request->mulai,
-                'selesai' => $request->selesai,
-                'lokasi' => $request->lokasi,
-                'konten' => $dom->saveHTML()
+                'slug' => \Str::slug($request->nama),
+                'nama' => $request->nama,
+                'kategori' => $request->kategori,
+                'stok' => $request->stok,
+                'harga' => $request->harga,
+                'deskripsi' => $dom->saveHTML(),
+                'berat' => $request->berat,
             ]);
         } else {
-            Storage::delete('public/event/' . $event->foto);
-
             $foto = $request->file('foto');
-            $foto->storeAs('public/blog', time() . $foto->hashName());
+            $foto->storeAs('public/product', time() . $foto->hashName());
 
-            $event->update([
+            $product->update([
                 'user_id' => auth()->user()->id,
+                'slug' => \Str::slug($request->nama),
                 'foto' => time() . $foto->hashName(),
-                'judul' => $request->judul,
-                'slug' => Str::slug($request->judul),
-                'mulai' => $request->mulai,
-                'selesai' => $request->selesai,
-                'lokasi' => $request->lokasi,
-                'konten' => $dom->saveHTML()
+                'nama' => $request->nama,
+                'kategori' => $request->kategori,
+                'stok' => $request->stok,
+                'harga' => $request->harga,
+                'deskripsi' => $dom->saveHTML(),
+                'berat' => $request->berat,
             ]);
         }
 
-        return redirect()->route('event.index');
+        return view('pages.shop.index');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Event  $event
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        $event = Event::findOrFail($id);
-        Storage::delete('public/event/' . $event->foto);
-        $event->delete();
+        //
     }
 }

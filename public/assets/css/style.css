@@ -16,9 +16,10 @@ body {
         11. EDIT OBAT
         12. CRUD ARTIKEL
         13. CRUD EVENT
-        14. KERANJANG
-        15. CHECKOUT
-        16. FOOTER 
+        14. DETAIL PRODUK
+        15. KERANJANG
+        16. CHECKOUT
+        17. FOOTER 
 */
 
 /* -----------------------------------------------------------------------------
@@ -116,7 +117,7 @@ body {
     .nav-link.active::after {
         content: '';
         display: block;
-        border-bottom: 3px solid #0B63DC;
+        border-bottom: 3px solid #62ACCC;
         margin: auto;
         margin-bottom: -8px;
         width: 50%;
@@ -126,11 +127,36 @@ body {
     .card-body {
         width: 100%;
     }
+
     .card-brand1 {
         font: 15px Viga;
         color: #000000;
     }
 
+    .button1 {
+        width: 40%;
+        padding: 0px 5px 5px 0px;
+        height: 40%;
+        background-color: white;
+        color: black;
+        border: 2px solid #f1f1f1;
+        transition: 0.3ms;
+    }
+
+    .button1:hover {background-color: #00b3ff;}
+
+    .button2 {
+        text-align: center;
+        width: 40%;
+        padding: 0px 5px 5px 0px;
+        height: 40%;
+        background-color: white;
+        color: black;
+        border: 2px solid #f1f1f1;
+        transition: 0.3ms;
+    }
+
+    .button2:hover {background-color: #62ACCC;}
 
     .jumbotron {
         margin-top: -90px;
@@ -224,9 +250,11 @@ body {
 	justify-self: start; 
 	background-color: #FFFFFF;
 }
+
 .card:hover .card-content {
 	margin-top: 40px;
 }
+
 .card-cover {
 	width: 100%; 
 	height: 200px; 
@@ -236,10 +264,12 @@ body {
 	box-shadow: 0 5px 10px rgba(0, 0, 0, .5); 
 	display: flex;
 }
+
 .card-cover h1 {
 	color: #FFFFFF;
 	font-size: 38px;
 }
+
 .card-content {
 	height: 200px;
 	width: 100%;
@@ -251,16 +281,24 @@ body {
 	overflow: hidden;
 	transition: margin-top .3s ease-out;
 }
-.card-title-1 {
+.card-title-1 h3 {
     font: 30px Viga;
     align-items: right;
     margin-left: -170px;
     margin-bottom: 40px;
 }
+
+.card-title-1 p {
+    margin-top: -40px;
+    margin-left: -170px;
+    margin-bottom: 20px;
+}
+
 .event-title h2 {
 	margin-top: 40px;
 	font: 40px Viga;
 }
+
 .event-title p{
 	margin-top: -5px;
 }
@@ -296,35 +334,30 @@ body {
     font: 10px Viga;
 }
 
-.categori_row {
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-    transition: 0.3s;
-    width: 20%;
-    height: auto;
-    padding: 0px 0px 0px 0px;
-    margin-left: 80px;
-}
 .categori_row:hover {
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
 }
+
 .categori_col {
 	padding-left: 10px;
 	padding-right: 10px;
 }
-.categori_content
-{
+
+.categori_content {
     padding-top: 2px;
 	padding-left: 18px;
 }
-.categori_content h6
-{
+
+.categori_content h6 {
 	text-transform: uppercase;
 	line-height: 18px;
 	font-weight: 500;
 }
+
 .card-header {
     background-color: #FFFFFF;
 }
+
 .card-categori {
     -webkit-box-shadow: 0 0 20px #dddddd;
 	box-shadow: 0 0 20px #dddddd;
@@ -332,6 +365,7 @@ body {
 	-o-transition: 0.3s;
 	transition: 0.3s;
 }
+
 .card-categori:hover {
     -webkit-box-shadow: 0 0 0;
 	box-shadow: 0 0 0;
@@ -600,10 +634,284 @@ body {
     background: #FFFFFF;
 }
 
+
+/**********************************/
+/******* EDIT USER PROFILE ********/
+/**********************************/
+.user-profile {
+	background: #F3F6FF;
+    position: relative;
+    padding-top: 30px;
+}
+
+.user-profile .user-inner {
+    margin-bottom: 30px;
+    padding: 30px;
+    background: #FFFFFF;
+}
+.card-img {
+    width: 110px;
+    height: 110px;
+    border-radius: 50px;
+    background-size: cover; 
+    background-position: top center;
+}
+
+.list {
+    margin-top: -60px;
+}
+
+.list-1 {
+    margin-top: -44px;
+}
+
+
 /**********************************/
 /********** CRUD ARTIKEL **********/
 /**********************************/
+.add-artikel {
+	background: #F3F6FF;
+    position: relative;
+    padding-top: 20px;
+}
 
+.box {
+    position: relative;
+    background: #ffffff;
+    width: 100%;
+}
+
+.box-header {
+    color: #444;
+    display: block;
+    padding: 10px;
+    position: relative;
+    border-bottom: 1px solid #f4f4f4;
+    margin-bottom: 10px;
+}
+
+.box-tools {
+    position: absolute;
+    right: 10px;
+    top: 5px;
+}
+
+.dropzone-wrapper {
+    border: 2px dashed #007BFF;
+    color: #007BFF;
+    position: relative;
+    height: 150px;
+}
+
+.dropzone-desc {
+    position: absolute;
+    margin: 0 auto;
+    left: 0;
+    right: 0;
+    text-align: center;
+    width: 90%;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 16px;
+}
+
+.dropzone,
+.dropzone:focus {
+    position: absolute;
+    outline: none !important;
+    width: 100%;
+    height: 150px;
+    cursor: pointer;
+    opacity: 0;
+}
+
+.dropzone-wrapper:hover,
+.dropzone-wrapper.dragover {
+    background: #ecf0f5;
+}
+
+.preview-zone {
+    text-align: center;
+}
+
+.preview-zone .box {
+    box-shadow: none;
+    border-radius: 0;
+    margin-bottom: 0;
+}
+
+/**********************************/
+/********* DETAIL PRODUCT *********/
+/**********************************/
+.product-detail {
+    margin-top: 40px;
+    position: relative;
+    width: 100%;
+    padding: 30px 0;
+}
+
+.product-detail .product-detail-top,
+.product-detail .product-detail-bottom {
+    margin-bottom: 30px;
+}
+
+.product-detail .product-detail-top {
+    padding: 0;
+    background: #ffffff;
+}
+
+.product-detail .product-content {
+    padding: 30px;
+}
+
+@media (min-width: 768px) {
+    .product-detail .product-content {
+        padding-left: 0;
+    }
+}
+
+.product-detail .product-content .title h2 {
+    font-size: 25px;
+    margin-bottom: 5px;
+}
+
+.product-detail .product-content .quantity {
+    margin-bottom: 15px;
+}
+
+.product-detail .product-content .price h4,
+.product-detail .product-content .quantity h4 {
+    display: inline-block;
+    width: 80px;
+    font-size: 18px;
+    font-weight: 700;
+    margin-right: 5px;
+}
+
+.product-detail .product-content .price p {
+    display: inline-block;
+    color: #000000;
+    font-size: 30px;
+    font-weight: 700;
+    margin: 0;
+}
+
+.product-detail .product-content .quantity .qty {
+    display: inline-block;
+    font-size: 0;
+}
+
+.product-detail .product-content .quantity button {
+    width: 30px;
+    height: 30px;
+    padding: 2px 0;
+    font-size: 16px;
+    text-align: center;
+    color: #ffffff;
+    background: #FF6F61;
+    border: none;
+}
+
+.product-detail .product-content .quantity button.btn-minus {
+    border-radius: 4px 0 0 4px;
+}
+
+.product-detail .product-content .quantity button.btn-plus {
+    border-radius: 0 4px 4px 0;
+}
+
+.product-detail .product-content .quantity input {
+    width: 40px;
+    height: 30px;
+    color: #ffffff;
+    font-size: 16px;
+    text-align: center;
+    background: #62ACCC;
+    border: none;
+}
+
+.product-detail .nav.nav-pills .nav-link {
+    color: #FF6F61;
+    background: #000000;
+    border-radius: 0;
+    transition: all .3s;
+}
+
+.product-detail .nav.nav-pills .nav-link:hover,
+.product-detail .nav.nav-pills .nav-link.active {
+    color: #000000;
+    background: #FF6F61;
+}
+
+.product-detail .tab-content {
+    background: #ffffff;
+    padding: 25px 15px 15px 15px;
+}
+
+.product-detail .tab-content ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.product-detail .tab-content ul li {
+    margin-bottom: 10px;
+}
+
+.product-detail .tab-content ul li::before {
+    content: '\f061';
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 900;
+    padding-right: 5px;
+}
+
+.product-detail .tab-content .reviews-submitted {
+    position: relative;
+    margin-bottom: 45px;
+}
+
+.product-detail .tab-content .reviewer span {
+    color: #666666;
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.product-detail .tab-content .form input {
+    width: 100%;
+    height: 35px;
+    padding: 0 15px;
+    color: #666666;
+    border: 1px solid #dddddd;
+    border-radius: 4px;
+    margin-bottom: 15px;
+}
+
+.product-detail .tab-content .form textarea {
+    width: 100%;
+    height: 80px;
+    padding: 6px 15px;
+    color: #666666;
+    border: 1px solid #dddddd;
+    border-radius: 4px;
+    margin-bottom: 15px;
+}
+
+.product-detail .tab-content .form button {
+    display: inline-block;
+    height: 35px;
+    padding: 0 15px;
+    color: #FF6F61;
+    background: #ffffff;
+    border: 1px solid #FF6F61;
+    border-radius: 4px;
+    margin-bottom: 15px;
+    transition: all .3s;
+}
+
+.product-detail .tab-content .form button:hover {
+    color: #ffffff;
+    background: #FF6F61;
+}
 
 /**********************************/
 /************ KERANJANG ***********/
@@ -755,6 +1063,8 @@ body {
     background: #ffffff;
 }
 
+
+
 /**********************************/
 /************ CHECKOUT ************/
 /**********************************/
@@ -846,6 +1156,28 @@ body {
 }
 
 
+/**********************************/
+/*********** PAGINATION ***********/
+/**********************************/
+.pagination {
+    justify-content: center;
+    /* display: inline-block; */
+  }
+  
+  .pagination a {
+    color: black;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+    transition: background-color .3s;
+  }
+  
+  .pagination a.active {
+    background-color: black;
+    color: white;
+  }
+
+  
 /**********************************/
 /************* FOOTER *************/
 /**********************************/
