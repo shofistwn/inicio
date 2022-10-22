@@ -17,7 +17,7 @@
                                 <div class="row pl-3 pr-3 align-items-center">
                                     <div class="col-md-6">
                                         <img class="mb-3 img-fluid"
-                                            src="{{ Storage::url('public/product/') . $product->foto }}">
+                                            src="//project.smkn2trenggalek.sch.id:6500/public/product/{{ $product->foto }}">
                                     </div>
                                     <div class="col-md-6">
                                         <label>Upload Foto Produk</label><br>

@@ -157,7 +157,7 @@
                             <a href="#">
                                 <div>
                                     <img class="latest-news-bg img-fluid" style=""
-                                        src="{{ Storage::url('public/artikel/') . $artikel->foto }}" alt="">
+                                        src="//project.smkn2trenggalek.sch.id:6500/public/artikel/{{ $artikel->foto }}" alt="">
                                 </div>
                             </a>
                             <div class="news-text-box">
@@ -186,7 +186,7 @@
                                     </button>
                                 </div>
                                 <div class="modal-body text-center">
-                                    <img src="{{ Storage::url('public/artikel/') . $artikel->foto }}" alt="">
+                                    <img src="//project.smkn2trenggalek.sch.id:6500/public/artikel/{{ $artikel->foto }}" alt="">
                                     <br><br>
                                     <div>
                                         {!! $artikel->deskripsi !!}

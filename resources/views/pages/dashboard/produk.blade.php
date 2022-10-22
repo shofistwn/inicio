@@ -33,7 +33,7 @@
                                 <tr>
                                     <td align="center" style="vertical-align: middle;">
                                         <img style="max-width: 200px" class="mb-3 img-fluid"
-                                            src="{{ Storage::url('public/product/') . $produk->foto }}">
+                                            src="//project.smkn2trenggalek.sch.id:6500/public/product/{{ $produk->foto }}">
                                     </td>
                                     <td align="center" style="vertical-align: middle;">{{ $produk->nama }}</td>
                                     <td align="center" style="vertical-align: middle;">

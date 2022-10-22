@@ -30,7 +30,7 @@
                                 <tr>
                                     <td align="center" style="vertical-align: middle;">
                                         <img style="max-width: 200px" class="mb-3 img-fluid"
-                                            src="{{ Storage::url('public/artikel/') . $artikel->foto }}">
+                                            src="//project.smkn2trenggalek.sch.id:6500/public/artikel/{{ $artikel->foto }}">
                                     </td>
                                     <td align="center" style="vertical-align: middle;">{{ $artikel->judul }}</td>
                                     <td align="center" style="vertical-align: middle;">{{ $artikel->kategori }}</td>

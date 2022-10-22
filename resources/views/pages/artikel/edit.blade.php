@@ -19,7 +19,7 @@
                                 <div class="row pl-3 pr-3 align-items-center">
                                     <div class="col-md-6">
                                         <img class="mb-3 img-fluid"
-                                            src="{{ Storage::url('public/artikel/') . $artikel->foto }}">
+                                            src="//project.smkn2trenggalek.sch.id:6500/public/artikel/{{ $artikel->foto }}">
                                     </div>
                                     <div class="col-md-6">
                                         <label>Thumbnail Artikel</label><br>

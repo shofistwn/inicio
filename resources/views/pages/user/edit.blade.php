@@ -23,7 +23,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <img class="img-fluid rounded border"
-                                        src="{{ Storage::url('public/user/') . $user->foto }}">
+                                        src="//project.smkn2trenggalek.sch.id:6500/public/user/{{ $user->foto }}">
                                 </div>
                                 <div class="col-md-6">
                                     <label>No HP</label>

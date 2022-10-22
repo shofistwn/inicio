@@ -28,7 +28,7 @@
                                                     <a href="{{ route('produk.show', $product['product']['slug']) }}">
                                                         <div class="img">
                                                             <img class="mb-3 img-fluid"
-                                                                src="{{ Storage::url('public/product/') . $product['product']['foto'] }}">
+                                                                src="//project.smkn2trenggalek.sch.id:6500/public/product/{{ $product['product']['foto'] }}">
                                                             <p class="text-dark">{{ $product['product']['nama'] }}</p>
                                                         </div>
                                                     </a>

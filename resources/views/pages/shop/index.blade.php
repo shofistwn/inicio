@@ -46,7 +46,7 @@
                             @forelse ($products as $product)
                                 <div class="col-sm-3">
                                     <div class="card">
-                                        <img class="mb-3" src="{{ Storage::url('public/product/') . $product->foto }}">
+                                        <img class="mb-3" src="//project.smkn2trenggalek.sch.id:6500/public/product/{{ $product->foto }}">
                                         <div class="container">
                                             <h4 href="{{ route('produk.show', $product->id) }}">{{ $product->nama }}</h4>
                                             <div class="row">

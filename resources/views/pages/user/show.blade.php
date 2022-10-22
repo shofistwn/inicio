@@ -100,7 +100,7 @@
     <section class="profile-container">
         <div class="profile">
             @if ($user->foto !== null)
-            <img src="{{ Storage::url('public/user/') . $user->foto }}" alt="">
+            <img src="//project.smkn2trenggalek.sch.id:6500/public/user/{{ $user->foto }}" alt="">
             @endif
             <h3>{{ $user->nama }}</h3>
             <h3>{{ $user->email }}</h3>
