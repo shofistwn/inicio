@@ -14,7 +14,8 @@ class ArtikelController extends Controller
      */
     public function index()
     {
-        //
+        $dataArtikel = Artikel::all();
+        return response()->json($dataArtikel);
     }
 
     /**
@@ -24,7 +25,7 @@ class ArtikelController extends Controller
      */
     public function create()
     {
-        //
+        return view('pages.artikel.create');
     }
 
     /**
@@ -44,9 +45,10 @@ class ArtikelController extends Controller
      * @param  \App\Models\Artikel  $artikel
      * @return \Illuminate\Http\Response
      */
-    public function show(Artikel $artikel)
+    public function show($slug)
     {
-        //
+        $artikel = Artikel::where('slug', $slug)->first();
+        return response()->json($artikel);
     }
 
     /**

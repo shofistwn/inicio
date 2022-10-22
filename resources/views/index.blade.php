@@ -16,7 +16,12 @@
                     <a class="nav-item nav-link" href="{{ route('shop.index') }}">Shop</a>
                     @auth
                         <a class="nav-item nav-link" href="{{ route('user.profile') }}">Profile</a>
-                        <a class="nav-item nav-link" href="">Logout</a>
+                        {{-- <a class="nav-item nav-link" href="">Logout</a> --}}
+
+                        <form action="{{ route('logout') }}" method="POST">
+                            @csrf
+                            <button type="submit" class="btn btn-none text-white">LOGOUT</button>
+                        </form>
                     @endauth
                     @guest
                         <a class="nav-item nav-link" href="{{ route('login') }}">Login</a>

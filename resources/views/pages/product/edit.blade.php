@@ -14,44 +14,68 @@
                             @method('PUT')
 
                             <div class="row">
-                                <div class="col-md-12">
-                                    <label>Upload Foto Produk</label><br>
-                                    <input type="file" accept="image/png,image/jpg,image/jpeg" name="foto">
+                                <div class="row pl-3 pr-3 align-items-center">
+                                    <div class="col-md-6">
+                                        <img class="mb-3 img-fluid"
+                                            src="{{ Storage::url('public/product/') . $product->foto }}">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label>Upload Foto Produk</label><br>
+                                        <input type="file" accept="image/png,image/jpg,image/jpeg" name="foto">
+                                    </div>
                                 </div>
                                 <div class="col-md-12 mt-2">
                                     <label>Nama Produk</label>
-                                    <input class="form-control" type="text" placeholder="Nama Produk" name="nama" value="{{ old('nama', $product->nama) }}">
+                                    <input class="form-control" type="text" placeholder="Nama Produk" name="nama"
+                                        value="{{ old('nama', $product->nama) }}">
                                 </div>
                                 <div class="col-md-12 mt-2">
                                     <label>Stok</label>
                                     <input class="form-control" type="number" placeholder="Stok" name="stok"
-                                    value="{{ old('stok', $product->stok) }}">
+                                        value="{{ old('stok', $product->stok) }}">
                                 </div>
                                 <div class="col-md-12 mt-2">
                                     <label>Harga</label>
                                     <input class="form-control" type="number" placeholder="Harga" name="harga"
-                                    value="{{ old('harga', $product->harga) }}">
+                                        value="{{ old('harga', $product->harga) }}">
                                 </div>
                                 <div class="col-md-12 mt-2">
                                     <label>Kategori</label>
                                     <select class="custom-select" name="kategori">
                                         <option>Kategori Produk</option>
-                                        <option {{ old('kategori', $product->kategori) == 'Batuk dan Flu' ? 'selected' : '' }}>Batuk dan Flu</option>
-                                        <option {{ old('kategori', $product->kategori) == 'Demam' ? 'selected' : '' }}>Demam</option>
-                                        <option {{ old('kategori', $product->kategori) == 'Kulit' ? 'selected' : '' }}>Kulit</option>
-                                        <option {{ old('kategori', $product->kategori) == 'Otot dan Tulang' ? 'selected' : '' }}>Otot dan Tulang</option>
-                                        <option {{ old('kategori', $product->kategori) == 'Alergi' ? 'selected' : '' }}>Alergi</option>
-                                        <option {{ old('kategori', $product->kategori) == 'Perawatan Kewanitaan' ? 'selected' : '' }}>Perawatan Kewanitaan</option>
-                                        <option {{ old('kategori', $product->kategori) == 'Saluran pencernaan' ? 'selected' : '' }}>Saluran pencernaan</option>
-                                        <option {{ old('kategori', $product->kategori) == 'Vitamin dan Suplemen' ? 'selected' : '' }}>Vitamin dan Suplemen</option>
-                                        <option {{ old('kategori', $product->kategori) == 'Antibiotik' ? 'selected' : '' }}>Antibiotik</option>
-                                        <option {{ old('kategori', $product->kategori) == 'Mulut dan Tenggorokan' ? 'selected' : '' }}>Mulut dan Tenggorokan</option>
+                                        <option
+                                            {{ old('kategori', $product->kategori) == 'Batuk dan Flu' ? 'selected' : '' }}>
+                                            Batuk dan Flu</option>
+                                        <option {{ old('kategori', $product->kategori) == 'Demam' ? 'selected' : '' }}>Demam
+                                        </option>
+                                        <option {{ old('kategori', $product->kategori) == 'Kulit' ? 'selected' : '' }}>Kulit
+                                        </option>
+                                        <option
+                                            {{ old('kategori', $product->kategori) == 'Otot dan Tulang' ? 'selected' : '' }}>
+                                            Otot dan Tulang</option>
+                                        <option {{ old('kategori', $product->kategori) == 'Alergi' ? 'selected' : '' }}>
+                                            Alergi</option>
+                                        <option
+                                            {{ old('kategori', $product->kategori) == 'Perawatan Kewanitaan' ? 'selected' : '' }}>
+                                            Perawatan Kewanitaan</option>
+                                        <option
+                                            {{ old('kategori', $product->kategori) == 'Saluran pencernaan' ? 'selected' : '' }}>
+                                            Saluran pencernaan</option>
+                                        <option
+                                            {{ old('kategori', $product->kategori) == 'Vitamin dan Suplemen' ? 'selected' : '' }}>
+                                            Vitamin dan Suplemen</option>
+                                        <option
+                                            {{ old('kategori', $product->kategori) == 'Antibiotik' ? 'selected' : '' }}>
+                                            Antibiotik</option>
+                                        <option
+                                            {{ old('kategori', $product->kategori) == 'Mulut dan Tenggorokan' ? 'selected' : '' }}>
+                                            Mulut dan Tenggorokan</option>
                                     </select>
                                 </div>
                                 <div class="col-md-12 mt-2">
                                     <label>Berat Produk</label>
                                     <input class="form-control" type="number" placeholder="Berat Produk" name="berat"
-                                    value="{{ old('berat', $product->berat) }}">
+                                        value="{{ old('berat', $product->berat) }}">
                                 </div>
                                 <div class="col-md-12 mt-2">
                                     <label for="textarea">Deskripsi</label>

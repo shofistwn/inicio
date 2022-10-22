@@ -6,6 +6,7 @@ use Exception;
 use App\Models\{
     Cart,
     City,
+    ModelHasRoles,
     produk,
     Product,
     Province,

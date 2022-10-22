@@ -23,18 +23,18 @@ class CartController extends Controller
 
         foreach ($request['ids'] as $key => $id) {
             Cart::where('user_id', auth()->user()->id)
-            ->where('product_id', $id)
-            ->update([
-                'quantity' => $request['quantities'][$key]
-            ]);
+                ->where('product_id', $id)
+                ->update([
+                    'quantity' => $request['quantities'][$key]
+                ]);
         }
 
         return redirect()->route('shop.checkout2');
     }
 
-    public function destroy($id)
+    public function destroy()
     {
-        Cart::find($id)->delete();
+        Cart::where('user_id', auth()->user()->id)->delete();
         return redirect()->route('shop.cart');
     }
 }

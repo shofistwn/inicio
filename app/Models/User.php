@@ -50,21 +50,6 @@ class User extends Authenticatable
         return $this->belongsTo(UserAddress::class);
     }
 
-    public function blog()
-    {
-        return $this->hasMany(Blog::class);
-    }
-
-    public function event()
-    {
-        return $this->hasMany(Event::class);
-    }
-
-    public function obat()
-    {
-        return $this->hasMany(Obat::class);
-    }
-
     public function product()
     {
         return $this->hasMany(Product::class);

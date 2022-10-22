@@ -45,15 +45,17 @@
                 </div>
                 <div class="col-md-6">
                     <div class="search">
-                        <input type="text" placeholder="Search">
-                        <button><i class="fa fa-search"></i></button>
+                        <form action="{{ route('shop.search') }}" method="GET">
+                            <input type="text" name="nama" value="{{ old('nama') }}" placeholder="Search">
+                            <button type="submit"><i class="fa fa-search"></i></button>
+                        </form>
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="user">
-                        <a href="#" class="btn cart">
+                        <a href="{{ route('shop.cart') }}" class="btn cart">
                             <i class="fa fa-shopping-cart"></i>
-                            <span>(0)</span>
+                            <span>({{ \DB::table('carts')->where('user_id', auth()->user()->id)->count() }})</span>
                         </a>
                     </div>
                 </div>
@@ -74,12 +76,14 @@
                             @forelse ($products as $product)
                                 <div class="col-sm-3">
                                     <div class="card">
-                                        <img src="{{ asset('assets/img/obat/acetylcysteine.webp') }}">
+                                        <img class="mb-3" src="{{ Storage::url('public/product/') . $product->foto }}">
                                         <div class="container">
                                             <h4 href="{{ route('produk.show', $product->id) }}">{{ $product->nama }}</h4>
                                             <div class="row">
-                                                <a href="{{ route('produk.show', $product->id) }}" class="button button1 mb-3 ml-3">Detail</a>
-                                                <a class="button button2 mb-3 ml-3" href="">Beli</a>
+                                                <a href="{{ route('produk.show', $product->slug) }}"
+                                                    class="d-flex align-items-center justify-content-center button button1 mb-3 ml-3">Detail</a>
+                                                <a class="d-flex align-items-center justify-content-center button button2 mb-3 ml-3"
+                                                    href="{{ route('shop.checkout', $product->id) }}">Beli</a>
                                             </div>
                                         </div>
                                     </div>
@@ -88,13 +92,9 @@
                             @endforelse
                         </div>
                     </div>
-                    <div class="pagination ml-auto">
-                        <a href="#">&laquo;</a>
-                        <a href="#">1</a>
-                        <a href="#" class="active">2</a>
-                        <a href="#">3</a>
-                        <a href="#">&raquo;</a>
-                    </div>
+
+                    {{ $products->links() }}
+
                 </div>
             </div>
         </div>

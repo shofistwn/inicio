@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
-use GuzzleHttp\Handler\Proxy;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
 {
@@ -16,6 +16,17 @@ class ProductController extends Controller
     public function index()
     {
         $products = Product::paginate(8);
+        return view('pages.shop.index', compact('products'));
+    }
+
+    public function search(Request $request)
+    {
+        $nama = $request->nama;
+
+        $products = DB::table('products')
+            ->where('nama', 'like', "%" . $nama . "%")
+            ->paginate(8);
+
         return view('pages.shop.index', compact('products'));
     }
 
@@ -70,7 +81,7 @@ class ProductController extends Controller
 
         Product::create([
             'user_id' => auth()->user()->id,
-            'slug' => \Str::slug($request->nama),
+            'slug' => time() . '-' .\Str::slug($request->nama),
             'foto' => time() . $foto->hashName(),
             'nama' => $request->nama,
             'kategori' => $request->kategori,
@@ -80,7 +91,7 @@ class ProductController extends Controller
             'berat' => $request->berat,
         ]);
 
-        return view('pages.shop.index');
+        return redirect()->route('shop.index');
     }
 
     /**
@@ -89,9 +100,9 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($slug)
     {
-        $product = Product::find($id);
+        $product = Product::where('slug', $slug)->first();
         return response()->json($product);
     }
 
@@ -148,7 +159,7 @@ class ProductController extends Controller
         if ($request->file('foto') == "") {
             $product->update([
                 'user_id' => auth()->user()->id,
-                'slug' => \Str::slug($request->nama),
+                'slug' => time() . '-' .\Str::slug($request->nama),
                 'nama' => $request->nama,
                 'kategori' => $request->kategori,
                 'stok' => $request->stok,
@@ -162,7 +173,7 @@ class ProductController extends Controller
 
             $product->update([
                 'user_id' => auth()->user()->id,
-                'slug' => \Str::slug($request->nama),
+                'slug' => time() . '-' .\Str::slug($request->nama),
                 'foto' => time() . $foto->hashName(),
                 'nama' => $request->nama,
                 'kategori' => $request->kategori,
@@ -173,7 +184,7 @@ class ProductController extends Controller
             ]);
         }
 
-        return view('pages.shop.index');
+        return redirect()->route('shop.index');
     }
 
     /**
