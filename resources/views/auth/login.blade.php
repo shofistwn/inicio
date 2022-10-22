@@ -1,4 +1,4 @@
-@extends('layouts.main')
+@extends('layouts.main-without-navbar-footer')
 
 @section('title', 'Login')
 @section('content')

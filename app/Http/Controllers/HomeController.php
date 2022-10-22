@@ -30,11 +30,17 @@ class HomeController extends Controller
         return view('home');
     }
 
+    public function profile()
+    {
+        $user = User::find(auth()->user()->id);
+        return view('pages.user.show', compact('user'));
+    }
+
     public function edit()
     {
         $user = UserAddress::where('user_id', auth()->user()->id)
-        ->join('users', 'user_addresses.user_id', '=', 'users.id')
-        ->first();
+            ->join('users', 'user_addresses.user_id', '=', 'users.id')
+            ->first();
 
         // jika user address tidak ditemukan akan di set null
         if (is_null($user)) {
@@ -101,6 +107,6 @@ class HomeController extends Controller
             ]);
         }
 
-        return redirect()->route('user.profile');
+        return redirect()->route('user.index');
     }
 }

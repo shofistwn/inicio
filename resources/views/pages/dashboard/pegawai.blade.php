@@ -1,4 +1,4 @@
-@extends('layouts.dashboard')
+@extends('layouts.admin')
 
 @section('title', 'Data Pegawai')
 @section('content')
@@ -27,7 +27,7 @@
                                 <tr>
                                     <td align="center" style="vertical-align: middle;">{{ $value['nama'] }}</td>
                                     <td align="center" style="vertical-align: middle;">{{ $value['email'] }}</td>
-                                    <td>
+                                    <td align="center" style="vertical-align: middle;">
                                         <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="{{ route('dashboard.hapusPegawai', $value['id']) }}"
                                             method="POST">
                                             @csrf

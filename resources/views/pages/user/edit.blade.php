@@ -1,4 +1,4 @@
-@extends('layouts.main')
+@extends('layouts.main-without-navbar-footer')
 
 @section('title', 'Edit Profil')
 @section('content')
@@ -21,12 +21,11 @@
                                     <input class="form-control" type="text" placeholder="masukkan nama" name="nama"
                                         value="{{ old('nama', $user->nama) }}">
                                 </div>
-                                <div class="col-md-3">
-                                    <label for="image" class="form-label">Profile photo (max : 1mb)</label>
-                                    <img class="mb-3 img-fluid rounded border"
+                                <div class="col-md-6">
+                                    <img class="img-fluid rounded border"
                                         src="{{ Storage::url('public/user/') . $user->foto }}">
                                 </div>
-                                <div class="col-md-6 list">
+                                <div class="col-md-6">
                                     <label>No HP</label>
                                     <input class="form-control" type="text" placeholder="masukkan no hp" name="telepon"
                                         value="{{ old('telepon', $user->telepon) }}">
@@ -35,7 +34,7 @@
                                     <label>Upload Foto</label><br>
                                     <input type="file" accept="image/png,image/jpg,image/jpeg" name="foto">
                                 </div>
-                                <div class="col-md-6 list-1">
+                                <div class="col-md-6 mt-2">
                                     <label>Email</label>
                                     <input class="form-control" type="text" placeholder="masukkan email" name="email"
                                         value="{{ old('email', $user->email) }}">
@@ -51,7 +50,7 @@
                                         @endforeach
                                     </select>
                                 </div>
-                                <div class="col-md-6 list-1">
+                                <div class="col-md-6 mt-2">
                                     <label>Kode Pos</label>
                                     <input class="form-control" type="text" placeholder="masukkan kota" name="kode_pos"
                                         value="{{ old('kode_pos', $user->kode_pos) }}">
@@ -68,7 +67,7 @@
                                         @endforeach
                                     </select>
                                 </div>
-                                <div class="col-md-6 list-1">
+                                <div class="col-md-6 mt-2">
                                     <label for="textarea">Alamat Lengkap</label>
                                     <textarea class="form-control" rows="2" id="textarea" placeholder="Rt / Rw / Desa / Jalan / Gang"
                                         name="alamat_detail">{{ old('alamat_detail', $user->alamat_detail) }}</textarea>

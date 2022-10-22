@@ -10,8 +10,19 @@
                 <a class="nav-item nav-link active" href="#">Home <span class="sr-only">(current)</span></a>
                 <a class="nav-item nav-link" href="{{ route('shop.index') }}">Shop</a>
                 @auth
+                    @hasrole('admin')
+                        <a class="nav-item nav-link" href="{{ route('dashboard.index') }}">Dashboard</a>
+                    @endhasrole
+                    @hasrole('pegawai')
+                        <a class="nav-item nav-link" href="{{ route('pegawai.index') }}">Dashboard</a>
+                    @endhasrole
                     <a class="nav-item nav-link" href="{{ route('user.profile') }}">Profile</a>
-                    <a class="nav-item nav-link" href="">Logout</a>
+
+                    <form action="{{ route('logout') }}" method="POST">
+                        @csrf
+                        <button type="submit" class="nav-item nav-link"
+                            style="background: none; border:none">LOGOUT</button>
+                    </form>
                 @endauth
                 @guest
                     <a class="nav-item nav-link" href="{{ route('login') }}">Login</a>

@@ -9,6 +9,7 @@ use App\Http\Controllers\{
     ArtikelController
 };
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Pegawai\DashboardController as PegawaiDashboardController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -28,20 +29,6 @@ Route::get('/', function () {
 })->name('home');
 
 Auth::routes();
-
-// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-// Route::get('admin-page', function () {
-//     return 'Halaman untuk admin';
-// })->middleware('role:admin')->name('admin.page');
-
-// Route::get('pegawai-page', function () {
-//     return 'Halaman untuk pegawai';
-// })->middleware('role:pegawai')->name('pegawai.page');
-
-// Route::get('pelanggan-page', function () {
-//     return 'Halaman untuk pelanggan';
-// })->middleware('role:pelanggan')->name('pelanggan.page');
 
 // api rajaongkir
 Route::post('/ongkir', [TransaksiController::class, 'check_ongkir']);
@@ -67,6 +54,7 @@ Route::get('/artikel/{slug}', [ArtikelController::class, 'show'])->name('artikel
 Route::middleware('auth')->group(function () {
     // user
     Route::get('/user', [HomeController::class, 'edit'])->name('user.profile');
+    Route::get('/profile', [HomeController::class, 'profile'])->name('user.index');
     Route::put('/user', [HomeController::class, 'update'])->name('user.update');
 
     // cart
@@ -118,8 +106,16 @@ Route::middleware('auth')->group(function () {
         Route::get('/pegawai', [DashboardController::class, 'pegawai'])->name('pegawai');
         Route::delete('/pegawai/{id}', [DashboardController::class, 'hapusPegawai'])->name('hapusPegawai');
         Route::get('/artikel', [DashboardController::class, 'artikel'])->name('artikel');
+        Route::delete('/artikel/{id}', [DashboardController::class, 'hapusArtikel'])->name('hapusArtikel');
+        Route::get('/produk', [DashboardController::class, 'produk'])->name('produk');
+        Route::delete('/produk/{id}', [DashboardController::class, 'hapusProduk'])->name('hapusProduk');
     });
 
-    Route::middleware('role:pegawai')->group(function () {
+    Route::middleware('role:pegawai')->prefix('pegawai')->name('pegawai.')->group(function () {
+        Route::get('/', [PegawaiDashboardController::class, 'index'])->name('index');
+        Route::get('/artikel', [PegawaiDashboardController::class, 'artikel'])->name('artikel');
+        Route::delete('/artikel/{id}', [PegawaiDashboardController::class, 'hapusArtikel'])->name('hapusArtikel');
+        Route::get('/produk', [PegawaiDashboardController::class, 'produk'])->name('produk');
+        Route::delete('/produk/{id}', [PegawaiDashboardController::class, 'hapusProduk'])->name('hapusProduk');
     });
 });

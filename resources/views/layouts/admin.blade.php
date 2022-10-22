@@ -12,7 +12,8 @@
     <title>@yield('title')</title>
 
     <!-- Custom fonts for this template-->
-    <link href="{{ asset('assets-dashboard/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('assets-dashboard/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet"
+        type="text/css">
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
@@ -54,7 +55,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#">
+                <a class="nav-link collapsed" href="{{ route('dashboard.produk') }}">
                     <i class="fas fa-shopping-bag"></i>
                     <span>Produk</span>
                 </a>
@@ -99,17 +100,23 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ auth()->user()->nama }}</span>
-                                <img class="img-profile rounded-circle" src="{{ Storage::url('public/user/') . auth()->user()->foto }}">
+                                <span
+                                    class="mr-2 d-none d-lg-inline text-gray-600 small">{{ auth()->user()->nama }}</span>
+                                <img class="img-profile rounded-circle"
+                                    src="{{ Storage::url('public/user/') . auth()->user()->foto }}">
                             </a>
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="userDropdown">
                                 <a class="dropdown-item" href="#">
-                                    <a class="dropdown-item" href="#" data-toggle="modal"
-                                        data-target="#logoutModal">
-                                        <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                        Logout
-                                    </a>
+                                    <form action="{{ route('logout') }}" method="POST">
+                                        @csrf
+                                        <button type="submit" style="background: none; border:none">
+                                                <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                                Logout
+
+                                        </button>
+                                    </form>
+                                </a>
                             </div>
                         </li>
                     </ul>

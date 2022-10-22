@@ -1,16 +1,17 @@
 @extends('layouts.admin')
 
-@section('title', 'Data Artikel')
+@section('title', 'Data Produk')
 @section('content')
     <div class="container-fluid">
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800">Artikel</h1>
-            <a class="btn btn-primary" href="{{ route('artikel.create') }}">Tambah Artikel</a>
+            <h1 class="h3 mb-0 text-gray-800">Data Produk</h1>
+            <a class="btn btn-primary" href="{{ route('produk.create') }}">Tambah Produk</a>
         </div>
+
 
         <div class="card shadow mb-4">
             <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">Data Artikel</h6>
+                <h6 class="m-0 font-weight-bold text-primary">Produk</h6>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -18,27 +19,33 @@
                         <thead>
                             <tr>
                                 <th>Foto</th>
-                                <th>Judul</th>
+                                <th>Nama Produk</th>
+                                <th>Harga</th>
+                                <th>Stok</th>
+                                <th>Berat</th>
                                 <th>Kategori</th>
-                                <th>Tanggal</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
 
-                            @forelse ($dataArtikel as $artikel)
+                            @forelse ($dataProduk as $produk)
                                 <tr>
                                     <td align="center" style="vertical-align: middle;">
                                         <img style="max-width: 200px" class="mb-3 img-fluid"
-                                            src="{{ Storage::url('public/artikel/') . $artikel->foto }}">
+                                            src="{{ Storage::url('public/product/') . $produk->foto }}">
                                     </td>
-                                    <td align="center" style="vertical-align: middle;">{{ $artikel->judul }}</td>
-                                    <td align="center" style="vertical-align: middle;">{{ $artikel->kategori }}</td>
-                                    <td align="center" style="vertical-align: middle;">{{ $artikel->created_at }}</td>
+                                    <td align="center" style="vertical-align: middle;">{{ $produk->nama }}</td>
                                     <td align="center" style="vertical-align: middle;">
-                                        <a class="btn btn-primary mb-2" href="{{ route('artikel.edit', $artikel->id) }}">Edit</a>
-                                        <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="{{ route('dashboard.hapusArtikel', $artikel->id) }}"
-                                            method="POST">
+                                        {{ number_format($produk->harga, 2, ',', '.') }}</td>
+                                    <td align="center" style="vertical-align: middle;">{{ $produk->stok }}</td>
+                                    <td align="center" style="vertical-align: middle;">{{ $produk->berat }}</td>
+                                    <td align="center" style="vertical-align: middle;">{{ $produk->kategori }}</td>
+                                    <td align="center" style="vertical-align: middle;">
+                                        <a class="btn btn-primary mb-2"
+                                            href="{{ route('produk.edit', $produk->id) }}">Edit</a>
+                                        <form onsubmit="return confirm('Apakah Anda Yakin ?');"
+                                            action="{{ route('dashboard.hapusProduk', $produk->id) }}" method="POST">
                                             @csrf
                                             @method('DELETE')
 
@@ -48,7 +55,7 @@
                                 </tr>
                             @empty
                                 <tr>
-                                    <td colspan="4">Tidak ada data!</td>
+                                    <td colspan="7">Tidak ada data!</td>
                                 </tr>
                             @endforelse
                         </tbody>

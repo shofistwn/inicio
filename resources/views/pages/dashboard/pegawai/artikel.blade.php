@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('layouts.pegawai')
 
 @section('title', 'Data Artikel')
 @section('content')

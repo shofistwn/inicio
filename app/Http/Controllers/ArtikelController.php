@@ -74,7 +74,7 @@ class ArtikelController extends Controller
             'deskripsi' => $dom->saveHTML(),
         ]);
 
-        return redirect()->route('artikel.index');
+        return redirect()->route('home');
     }
 
     /**
@@ -158,7 +158,7 @@ class ArtikelController extends Controller
             ]);
         }
 
-        return redirect()->route('artikel.index');
+        return redirect()->route('home');
     }
 
     /**
@@ -171,6 +171,6 @@ class ArtikelController extends Controller
     {
         $artikel = Artikel::find($id);
         $artikel->delete();
-        return redirect()->route('artikel.index');
+        return redirect()->route('home');
     }
 }

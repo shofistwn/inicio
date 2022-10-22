@@ -1,4 +1,4 @@
-@extends('layouts.main-navbar-sm')
+@extends('layouts.main-without-navbar-footer')
 
 @section('title', 'Tambah Produk')
 @section('content')

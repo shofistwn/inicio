@@ -15,11 +15,10 @@ body {
         10. TAMBAH OBAT
         11. EDIT OBAT
         12. CRUD ARTIKEL
-        13. CRUD EVENT
-        14. DETAIL PRODUK
-        15. KERANJANG
-        16. CHECKOUT
-        17. FOOTER 
+        13. DETAIL PRODUK
+        14. KERANJANG
+        15. CHECKOUT
+        16. FOOTER 
 */
 
 /* -----------------------------------------------------------------------------
@@ -38,18 +37,6 @@ body {
   .news-bg-3 {
 	background-image: url(../img/artikel/blister.png);
   }
-  
-  .news-bg-4 {
-	background-image: url(../img/event/news-bg-4.jpg);
-  }
-  
-  .news-bg-5 {
-	background-image: url(../img/event/news-bg-5.jpg);
-  }
-  
-  .news-bg-6 {
-	background-image: url(../img/event/news-bg-6.jpg);
-  }
 
 /* HEADER / NAVBAR */
 .navbar-brand {
@@ -63,7 +50,7 @@ body {
     font: 23px Viga;
 }
 .jumbotron {
-    background: url(../img/image/header1.webp);
+    background: url(../img/image/bg.webp);
     background-size: cover;
     height: 540px;
     position: relative;
@@ -182,29 +169,31 @@ body {
 
 /* INFO PANEL / WORKINGSPACE */
 .info-panel {
-    height: 130px;
     background-color: white;
     padding: 30px;
-    margin-top: -100px;
+    margin-top: -120px;
     border-radius: 12px;
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.6);
+    box-shadow: 0 3px 20px rgba(0, 0, 0, 0.6);
 }
+
+.info-panel h4 {
+    font-size: 16px;
+    font-weight: bold;
+    margin-top: 20px;
+    text-transform: uppercase;
+}
+
+.info-panel p {
+    font-size: 14px;
+    font-weight: lighter;
+    color: #acacac;
+}
+
 .info-panel img {
     margin-top: -10px;
     width: 90px; 
     height: 90px; 
     border-radius: 70px;
-}
-.info-panel h4 {
-    font-size: 16px;
-    font-weight: bold;
-    margin-top: 10px;
-    text-transform: uppercase;
-}
-.info-panel p {
-    font-size: 14px;
-    font-weight: lighter;
-    color: #acacac;
 }
 
 .workingspace {
@@ -233,105 +222,19 @@ body {
 }
 
 /**********************************/
-/************** EVENT *************/
+/********** KATEGORI ALAT *********/
 /**********************************/
-.card1-event {
-	margin-left: -50px;
-	width: 160%; 
-	display: flex;
-	flex-wrap: wrap;
-}
-.card-event {
-    border: 0;  
-	width: 370px; 
-	padding: 20px;
-    margin-left: 25px;
-	margin-top: 100px; 
-	justify-self: start; 
-	background-color: #FFFFFF;
-}
-
-.card:hover .card-content {
-	margin-top: 40px;
-}
-
-.card-cover {
-	width: 100%; 
-	height: 200px; 
-	position: relative; 
-	margin-top: -60px; 
-	z-index: 10; 
-	box-shadow: 0 5px 10px rgba(0, 0, 0, .5); 
-	display: flex;
-}
-
-.card-cover h1 {
-	color: #FFFFFF;
-	font-size: 38px;
-}
-
-.card-content {
-	height: 200px;
-	width: 100%;
-	display: flex;
-	justify-content: flex-end;
-	flex-direction: column;
-	margin-top: -200px;
-	position: relative;
-	overflow: hidden;
-	transition: margin-top .3s ease-out;
-}
-.card-title-1 h3 {
-    font: 30px Viga;
-    align-items: right;
-    margin-left: -170px;
-    margin-bottom: 40px;
-}
-
-.card-title-1 p {
-    margin-top: -40px;
-    margin-left: -170px;
-    margin-bottom: 20px;
-}
-
-.event-title h2 {
-	margin-top: 40px;
-	font: 40px Viga;
-}
-
-.event-title p{
-	margin-top: -5px;
-}
-
 .card-categori-1 {
-    margin-top: 20px;
-    align-items: left;
-}
-.review .event {
-	padding-top: 80px;
-	margin-bottom: 45px;
-    display: flex;
-    align-items: center;
-    flex-direction: row;
-    background: #ffffff;
+    margin-top: auto;
 }
 
-/**********************************/
-/******* KATEGORI PENYAKIT ********/
-/**********************************/
-.card {
-	margin-bottom: 50px;
-}
-.categori {
-	margin-top: 10px;   
+.card-title-1 {
+    font: 30px Viga;
     margin-bottom: 40px;
 }
+
 .categori-judul {
     padding-top: 60px;
-}
-
-.category-title {
-    font: 10px Viga;
 }
 
 .categori_row:hover {
@@ -377,8 +280,9 @@ body {
 /********** LATEST NEWS ***********/
 /**********************************/
 .latest-news {
-	margin-top: -30px;
-	margin-bottom: 100px;
+    width: auto;
+	margin-top: -30%;
+    margin-bottom: 50px;
 }
 
 .item-img {
@@ -454,7 +358,7 @@ body {
 
 .latest-title h3 {	
     font: 30px Viga;
-	margin-top: 50px;
+	margin-top: auto;
 	margin-bottom: 5px;
 }
 
@@ -540,14 +444,12 @@ body {
 
 
 /**********************************/
-/********* KATEGORI OBAT **********/
-/**********************************/
-
-
-
-/**********************************/
 /************** LOGIN *************/
 /**********************************/
+.login {
+    padding-top: 100px;
+}
+
 .form-password {
     position: relative;
 }
@@ -1036,14 +938,14 @@ body {
 
 .cart-page .cart .cart-btn button {
     margin-top: 15px;
-    width: calc(50% - 15px);
+    width: calc(40% + 80px);
     height: 50px;
-    padding: 2px 10px;
+    padding: 10px 20px;
     text-align: center;
     color: #ffffff;
     background: #62ACCC;
     border: none;
-    border-radius: 4px;
+    border-radius: 5px;
 }
 
 .cart-page .cart .cart-btn button:hover {
@@ -1052,7 +954,8 @@ body {
 }
 
 .cart-page .cart .cart-btn button:first-child {
-    margin-right: 25px;
+    margin-right: 30px;
+    margin-left: 50px;
     color: #ffffff;
     background: #62ACCC;
     border: 1px solid #ffffff;
@@ -1155,6 +1058,10 @@ body {
     background: #ffffff;
 }
 
+.modal-body img {
+    width: 50%;
+    height: 100%;
+}
 
 /**********************************/
 /*********** PAGINATION ***********/
@@ -1194,7 +1101,13 @@ body {
 }
 
 .footer .footer-widget h2 {
-    size: 25px Viga;
+    font: 30px Viga;
+    white-space: nowrap;
+    margin-bottom: 20px; 
+}
+
+.footer .logo h2 {
+    font: 40px Viga;
     white-space: nowrap;
     margin-bottom: 20px; 
 }
@@ -1317,14 +1230,12 @@ body {
 /******** Footer Bottom CSS *******/
 /**********************************/
 .footer-bottom {
-    height: 70px;
-    position: relative;
+    height: 10%;
     padding: 25px 0;
-    background: #62ACCC;
-}
-
-.footer-bottom .copyright {
-    margin-left: 350px;
-    color: #FFFFFF;
-    justify-content: center;
-}
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: #62ACCC;
+    color: white;
+    text-align: center;
+  }

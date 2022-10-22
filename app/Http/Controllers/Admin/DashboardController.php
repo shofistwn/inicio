@@ -18,7 +18,9 @@ class DashboardController extends Controller
         $produkTerjual = Transaksi::sum('jumlah_pesanan');
         $produk = Product::count();
         $artikel = Artikel::count();
-        $dataTransaksi = Transaksi::with('product')->orderBy('id', 'desc')->get();
+        // $dataTransaksi = Transaksi::with('product')->orderBy('id', 'desc')->get();
+        $dataTransaksi = Transaksi::join('products', 'products.id', '=', 'transaksi.product_id')->orderBy('transaksi.id', 'desc')->get();
+        // return response()->json($dataTransaksi);
 
         return view('pages.dashboard.index', compact('pegawai', 'produkTerjual', 'produk', 'artikel', 'dataTransaksi'));
     }
@@ -37,6 +39,25 @@ class DashboardController extends Controller
 
     public function artikel()
     {
-        return view('pages.dashboard.artikel');
+        $dataArtikel = Artikel::all();
+        return view('pages.dashboard.artikel', compact('dataArtikel'));
+    }
+
+    public function hapusArtikel($id)
+    {
+        Artikel::find($id)->delete();
+        return redirect()->route('dashboard.artikel');
+    }
+
+    public function produk()
+    {
+        $dataProduk = Product::all();
+        return view('pages.dashboard.produk', compact('dataProduk'));
+    }
+
+    public function hapusProduk($id)
+    {
+        Product::find($id)->delete();
+        return redirect()->route('dashboard.produk');
     }
 }

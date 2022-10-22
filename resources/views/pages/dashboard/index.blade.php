@@ -1,4 +1,4 @@
-@extends('layouts.dashboard')
+@extends('layouts.admin')
 
 @section('title', 'Dashboard')
 @section('content')
@@ -83,12 +83,12 @@
                         </thead>
                         <tbody>
 
-                            @forelse ($dataTransaksi as $transaksi)
+                            @forelse ($dataTransaksi as $key => $transaksi)
                                 <tr>
-                                    <td align="center" style="vertical-align: middle;">{{ $transaksi['product']['nama'] }}
+                                    <td align="center" style="vertical-align: middle;">{{ $transaksi->product->nama }}
                                     </td>
                                     <td align="center" style="vertical-align: middle;">{{ $transaksi->jumlah_pesanan }}</td>
-                                    <td align="center" style="vertical-align: middle;">{{ $transaksi['product']['berat'] }}
+                                    <td align="center" style="vertical-align: middle;">{{ $transaksi->product->berat }}
                                     </td>
                                     <td align="center" style="vertical-align: middle;">
                                         {{ number_format($transaksi->ongkos_kirim, 2, ',', '.') }}</td>
