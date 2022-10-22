@@ -23,7 +23,7 @@ class CreateTransaksisTable extends Migration
             $table->foreignIdFor(Product::class);
             $table->string('no_resi')->nullable();
             $table->string('jasa_ekspedisi');
-            $table->string('jumlah_pesanan');
+            $table->integer('jumlah_pesanan');
             $table->string('subtotal');
             $table->string('ongkos_kirim');
             $table->string('total_pembayaran');

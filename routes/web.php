@@ -8,6 +8,7 @@ use App\Http\Controllers\{
     ProductController,
     ArtikelController
 };
+use App\Http\Controllers\Admin\DashboardController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -67,13 +68,13 @@ Route::middleware('auth')->group(function () {
     // user
     Route::get('/user', [HomeController::class, 'edit'])->name('user.profile');
     Route::put('/user', [HomeController::class, 'update'])->name('user.update');
-    
+
     // cart
     Route::get('/cart', [CartController::class, 'index'])->name('shop.cart');
     Route::post('/cart', [CartController::class, 'store'])->name('shop.store');
     Route::post('/shop/cart', [CartController::class, 'storeCart'])->name('shop.storeCart');
     Route::delete('/cart/delete', [CartController::class, 'destroy'])->name('cart.destroy');
-    
+
     // checkout
     Route::get('/checkout/{id}', [TransaksiController::class, 'checkout'])->name('shop.checkout');
     Route::get('/checkout', [TransaksiController::class, 'checkout2'])->name('shop.checkout2');
@@ -112,7 +113,11 @@ Route::middleware('auth')->group(function () {
             });
     });
 
-    Route::middleware('role:admin')->group(function () {
+    Route::middleware('role:admin')->prefix('dashboard')->name('dashboard.')->group(function () {
+        Route::get('/', [DashboardController::class, 'index'])->name('index');
+        Route::get('/pegawai', [DashboardController::class, 'pegawai'])->name('pegawai');
+        Route::delete('/pegawai/{id}', [DashboardController::class, 'hapusPegawai'])->name('hapusPegawai');
+        Route::get('/artikel', [DashboardController::class, 'artikel'])->name('artikel');
     });
 
     Route::middleware('role:pegawai')->group(function () {
