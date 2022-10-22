@@ -73,7 +73,8 @@
                     <div class="col-md-6">
                         <div class="card" style="width: 110px; border: 0;">
                             <a href="">
-                                <img src="{{ asset('assets/img/kategori/bantu-jalan.jpg') }}" style="width: 100px; height: 80px;">
+                                <img src="{{ asset('assets/img/kategori/bantu-jalan.jpg') }}"
+                                    style="width: 100px; height: 80px;">
                             </a>
                             <p>
                                 <center>Alat Bantu Jalan</center>
@@ -83,7 +84,8 @@
                     <div class="col-md-6">
                         <div class="card" style="width: 110px; border: 0;">
                             <a href="">
-                                <img src="{{ asset('assets/img/kategori/rapid.jpg') }}" style="width: 100px; height: 100px;">
+                                <img src="{{ asset('assets/img/kategori/rapid.jpg') }}"
+                                    style="width: 100px; height: 100px;">
                             </a>
                             <p>
                                 <center>Rapid Test</center>
@@ -103,7 +105,8 @@
                     <div class="col-md-6">
                         <div class="card" style="width: 110px; border: 0;">
                             <a href="">
-                                <img src="{{ asset('assets/img/kategori/model.png') }}" style="width: 100px; height: 100px;">
+                                <img src="{{ asset('assets/img/kategori/model.png') }}"
+                                    style="width: 100px; height: 100px;">
                             </a>
                             <p>
                                 <center>Model Kerangka Manusia</center>
@@ -113,7 +116,8 @@
                     <div class="col-md-6">
                         <div class="card" style="width: 110px; border: 0;">
                             <a href="">
-                                <img src="{{ asset('assets/img/kategori/kursiroda.jpeg') }}" style="width: 100px; height: 100px;">
+                                <img src="{{ asset('assets/img/kategori/kursiroda.jpeg') }}"
+                                    style="width: 100px; height: 100px;">
                             </a>
                             <p>
                                 <center>Kursi Roda</center>
@@ -123,7 +127,8 @@
                     <div class="col-md-6">
                         <div class="card" style="width: 110px; border: 0;">
                             <a href="">
-                                <img src="{{ asset('assets/img/kategori/termometer.png') }}" style="width: 100px; height: 100px;">
+                                <img src="{{ asset('assets/img/kategori/termometer.png') }}"
+                                    style="width: 100px; height: 100px;">
                             </a>
                             <p>
                                 <center>Termometer</center>
@@ -146,85 +151,53 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-lg-4 col-md-6">
-                    <div class="single-latest-news">
-                        <a href="#">
-                            <div class="latest-news-bg news-bg-1"></div>
-                        </a>
-                        <div class="news-text-box">
-                            <h3><a href="#">Hari Pendengaran Sedunia 2022</a></h3>
-                            <p class="blog-meta">
-                                <span class="date"><i class="fas fa-calendar"></i>17 October 2022</span>
-                            </p>
-                            <p class="excerpt">Hari Pendengaran Sedunia 2022yang pada tahun ini bertema Nasional :
-                                "Jaga pendengaran Kita Kini dan Nanti" dan Tema global : " Hear For Life, Listen With
-                                Care " .</p>
-                            <a class="latest-brand1" href="#" style="text-decoration: none;">Read More...</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="single-latest-news">
-                        <a href="#">
-                            <div class="latest-news-bg news-bg-2"></div>
-                        </a>
-                        <div class="news-text-box">
-                            <h3><a href="#">Efek Gaya Hidup Tidak Sehat pada Kesehatan</a></h3>
-                            <p class="blog-meta">
-                                <span class="date"><i class="fas fa-calendar"></i> 17 Oktober 2022</span>
-                            </p>
-                            <p class="excerpt">Gaya hidup tidak sehat yang tidak secara sadar atau bahkan sadar
-                                dilakukan oleh banyak orang, ternyata dapat berdampak buruk bagi kesehatan</p>
-                            <a class="latest-brand1" href="#" style="text-decoration: none;">Read More...</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 offset-md-3 offset-lg-0">
-                    <div class="single-latest-news">
-                        <a href="#">
-                            <div class="latest-news-bg news-bg-3"></div>
-                        </a>
-                        <div class="news-text-box">
-                            <h3><a href="#" style="text-decoration: none;">Kenali Cara Efektif Merawat Luka
-                                    Blister</a></h3>
-                            <p class="blog-meta">
-                                <span class="date"><i class="fas fa-calendar"></i> 17 Oktober 2022</span>
-                            </p>
-                            <p class="excerpt">Luka blister perlu ditangani dengan baik agar tidak infeksi. Penting
-                                untuk tidak memaksa memecahkan kantong cairannya.</p>
-                            <a type="button" class="latest-brand1" data-toggle="modal"
-                                data-target=".bd-example-modal-lg">
-                                Read More...
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                </div>
-            </div>
-        </div>
-    </div>
 
-    <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle">Nama event</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body text-center">
-                    <img src="{{ asset('assets/img/artikel/blister.png') }}" alt="">
-                    <br><br>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        Suscipit reprehenderit perferendis, corporis odio nostrum nihil
-                        velit repellat delectus quam iste, vitae expedita similique et dolore, aperiam quo. Vel, est nihil!
-                    </p>
-                </div>
+                @forelse ($dataArtikel as $key => $artikel)
+                    <div class="col-lg-4 col-md-6">
+                        <div class="single-latest-news">
+                            <a href="#">
+                                <div>
+                                <img class="latest-news-bg img-fluid" style="" src="{{ Storage::url('public/artikel/') . $artikel->foto }}" alt="">
+                                </div>
+                            </a>
+                            <div class="news-text-box">
+                                <h3><a href="#">{{ $artikel->judul }}</a></h3>
+                                <p class="blog-meta">
+                                    <span class="date"><i class="fas fa-calendar"></i>{{ $artikel->created_at }}</span>
+                                </p>
+                                <p class="excerpt">
+                                    {!! $artikel->deskripsi !!}
+                                </p>
+                                <a type="button" class="latest-brand1" data-toggle="modal"
+                                    data-target=".bd-example-modal-lg-{{ $key }}">
+                                    Read More...
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal fade bd-example-modal-lg-{{ $key }}" tabindex="-1" role="dialog"
+                        aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLongTitle">{{ $artikel->judul }}</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body text-center">
+                                    <img src="{{ Storage::url('public/artikel/') . $artikel->foto }}" alt="">
+                                    <br><br>
+                                    {!! $artikel->deskripsi !!}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                @empty
+                    <p>Tidak ada data!</p>
+                @endforelse
+
             </div>
         </div>
     </div>

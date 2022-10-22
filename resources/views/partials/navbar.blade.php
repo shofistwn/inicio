@@ -16,7 +16,7 @@
                     @hasrole('pegawai')
                         <a class="nav-item nav-link" href="{{ route('pegawai.index') }}">Dashboard</a>
                     @endhasrole
-                    <a class="nav-item nav-link" href="{{ route('user.profile') }}">Profile</a>
+                    <a class="nav-item nav-link" href="{{ route('user.index') }}">Profile</a>
 
                     <form action="{{ route('logout') }}" method="POST">
                         @csrf

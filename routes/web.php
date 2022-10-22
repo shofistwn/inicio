@@ -10,6 +10,9 @@ use App\Http\Controllers\{
 };
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Pegawai\DashboardController as PegawaiDashboardController;
+use App\Models\Artikel;
+use App\Models\Transaksi;
+use App\Models\UserAddress;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -25,7 +28,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('index');
+    $dataArtikel = Artikel::orderBy('created_at', 'desc')->take(3)->get();
+    return view('index', compact('dataArtikel'));
 })->name('home');
 
 Auth::routes();
@@ -73,7 +77,15 @@ Route::middleware('auth')->group(function () {
 
     // redirect setelah sukses bayar
     Route::get('/midtrans/finish', function () {
-        echo 'finish';
+        $transaksi = Transaksi::where('transaksi.user_id', Auth::user()->id)->orderBy('transaksi.created_at', 'desc')
+        ->join('products', 'products.id', '=', 'transaksi.product_id')
+        ->first();
+        $user = UserAddress::where('user_id', Auth::user()->id)
+        ->join('provinces', 'provinces.id', '=', 'user_addresses.provinsi')
+        ->join('cities', 'cities.id', '=', 'user_addresses.kota')
+        ->select('user_addresses.*', 'provinces.name as provinsi', 'cities.name as kota')
+        ->first();
+        return view('success', compact('transaksi', 'user'));
     });
 
     // hanya user yang memiliki role admin dan pegawai yang dapat mengakses halaman ini
