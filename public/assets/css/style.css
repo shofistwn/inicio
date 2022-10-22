@@ -225,7 +225,7 @@ body {
 /********** KATEGORI ALAT *********/
 /**********************************/
 .card-categori-1 {
-    margin-top: auto;
+    margin-top: 100px;
 }
 
 .card-title-1 {
@@ -281,7 +281,7 @@ body {
 /**********************************/
 .latest-news {
     width: auto;
-	margin-top: -30%;
+	margin-top: 100px;
     margin-bottom: 50px;
 }
 
