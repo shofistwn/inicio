@@ -1,4 +1,4 @@
-@extends('layouts.main')
+@extends('layouts.main-navbar-sm')
 
 @section('title', 'Edit Produk')
 @section('content')
@@ -42,34 +42,15 @@
                                 <div class="col-md-12 mt-2">
                                     <label>Kategori</label>
                                     <select class="custom-select" name="kategori">
-                                        <option>Kategori Produk</option>
-                                        <option
-                                            {{ old('kategori', $product->kategori) == 'Batuk dan Flu' ? 'selected' : '' }}>
-                                            Batuk dan Flu</option>
-                                        <option {{ old('kategori', $product->kategori) == 'Demam' ? 'selected' : '' }}>Demam
-                                        </option>
-                                        <option {{ old('kategori', $product->kategori) == 'Kulit' ? 'selected' : '' }}>Kulit
-                                        </option>
-                                        <option
-                                            {{ old('kategori', $product->kategori) == 'Otot dan Tulang' ? 'selected' : '' }}>
-                                            Otot dan Tulang</option>
-                                        <option {{ old('kategori', $product->kategori) == 'Alergi' ? 'selected' : '' }}>
-                                            Alergi</option>
-                                        <option
-                                            {{ old('kategori', $product->kategori) == 'Perawatan Kewanitaan' ? 'selected' : '' }}>
-                                            Perawatan Kewanitaan</option>
-                                        <option
-                                            {{ old('kategori', $product->kategori) == 'Saluran pencernaan' ? 'selected' : '' }}>
-                                            Saluran pencernaan</option>
-                                        <option
-                                            {{ old('kategori', $product->kategori) == 'Vitamin dan Suplemen' ? 'selected' : '' }}>
-                                            Vitamin dan Suplemen</option>
-                                        <option
-                                            {{ old('kategori', $product->kategori) == 'Antibiotik' ? 'selected' : '' }}>
-                                            Antibiotik</option>
-                                        <option
-                                            {{ old('kategori', $product->kategori) == 'Mulut dan Tenggorokan' ? 'selected' : '' }}>
-                                            Mulut dan Tenggorokan</option>
+                                        <option>Kategori Produk:</option>
+                                        <option {{ old('kategori', $product->kategori) == 'Alat Kedokteran' ? 'selected' : '' }}>Alat Kedokteran</option>
+                                        <option {{ old('kategori', $product->kategori) == 'Alat Bantu Dengar' ? 'selected' : '' }}>Alat Bantu Dengar</option>
+                                        <option {{ old('kategori', $product->kategori) == 'Alat Bantu Jalan' ? 'selected' : '' }}>Alat Bantu Jalan</option>
+                                        <option {{ old('kategori', $product->kategori) == 'Rapid Test' ? 'selected' : '' }}>Rapid Test</option>
+                                        <option {{ old('kategori', $product->kategori) == 'Alat P3K' ? 'selected' : '' }}>Alat P3K</option>
+                                        <option {{ old('kategori', $product->kategori) == 'Model Kerangka Manusia' ? 'selected' : '' }}>Model Kerangka Manusia</option>
+                                        <option {{ old('kategori', $product->kategori) == 'Kursi Roda' ? 'selected' : '' }}>Kursi Roda</option>
+                                        <option {{ old('kategori', $product->kategori) == 'Termometer' ? 'selected' : '' }}>Termometer</option>
                                     </select>
                                 </div>
                                 <div class="col-md-12 mt-2">

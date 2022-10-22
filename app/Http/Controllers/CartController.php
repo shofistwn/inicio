@@ -13,6 +13,22 @@ class CartController extends Controller
         return view('pages.shop.cart', compact('products'));
     }
 
+    public function storeCart(Request $request)
+    {
+        $request->validate([
+            'product_id' => 'required',
+            'quantity' => 'required',
+        ]);
+        
+        Cart::create([
+            'user_id' => auth()->user()->id,
+            'product_id' => $request->product_id,
+            'quantity' => $request->quantity,
+        ]);
+
+        return redirect()->route('shop.cart');
+    }
+
     public function store(Request $request)
     {
         // dd($request->all());

@@ -36,11 +36,12 @@
 </head>
 
 <body>
-    @include ('partials.navbar')
+
+    @include('partials.navbar-sm')
 
     @yield('content')
 
-    @include ('partials.footer')
+    @include('partials.footer')
 
     <!-- JavaScript Libraries -->
     {{-- <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script> --}}

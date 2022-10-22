@@ -103,7 +103,7 @@ class ProductController extends Controller
     public function show($slug)
     {
         $product = Product::where('slug', $slug)->first();
-        return response()->json($product);
+        return view('pages.product.show', compact('product'));
     }
 
     /**

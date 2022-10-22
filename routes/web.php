@@ -51,6 +51,7 @@ Route::post('/midtrans/notification', [MidtransController::class, 'receive']);
 
 // produk create
 Route::get('/produk/create', [ProductController::class, 'create'])->name('produk.create')->middleware('role:admin|pegawai');
+Route::get('/artikel/create', [ArtikelController::class, 'create'])->name('artikel.create')->middleware('role:admin|pegawai');
 
 // shop
 Route::get('/shop', [ProductController::class, 'index'])->name('shop.index');
@@ -70,6 +71,7 @@ Route::middleware('auth')->group(function () {
     // cart
     Route::get('/cart', [CartController::class, 'index'])->name('shop.cart');
     Route::post('/cart', [CartController::class, 'store'])->name('shop.store');
+    Route::post('/shop/cart', [CartController::class, 'storeCart'])->name('shop.storeCart');
     Route::delete('/cart/delete', [CartController::class, 'destroy'])->name('cart.destroy');
     
     // checkout
@@ -103,7 +105,6 @@ Route::middleware('auth')->group(function () {
             ->prefix('artikel')
             ->name('artikel.')
             ->group(function () {
-                Route::get('/create', 'create')->name('create');
                 Route::post('/', 'store')->name('store');
                 Route::get('/{id}/edit', 'edit')->name('edit');
                 Route::put('/{id}', 'update')->name('update');
